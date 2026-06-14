@@ -64,7 +64,15 @@ class _StretchDetailScreenState extends State<StretchDetailScreen> {
         padding: const EdgeInsets.fromLTRB(
             AppSpacing.md, 0, AppSpacing.md, AppSpacing.xl),
         children: [
-          VisualPlaceholder(stretch: s, height: 220),
+          Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 320, maxHeight: 320),
+              child: AspectRatio(
+                aspectRatio: 1,
+                child: VisualPlaceholder(stretch: s),
+              ),
+            ),
+          ),
           const SizedBox(height: AppSpacing.md),
           Wrap(
             spacing: 8,

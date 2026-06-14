@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../core/ad_service.dart';
 import '../../core/app_state.dart';
 import '../../core/constants/app_constants.dart';
 import '../../data/content_repository.dart';
@@ -43,12 +44,16 @@ class _RoutinePlayerScreenState extends State<RoutinePlayerScreen> {
         _segments.add(_Segment(s, 'Hold'));
       }
     }
+    // Warm up an interstitial so it's ready by the time the routine ends.
+    AdService.instance.preloadInterstitial();
   }
 
   void _onSegmentDone() {
     if (_i >= _segments.length - 1) {
       setState(() => _done = true);
       AppState.instance.registerSessionComplete();
+      // Ad shows AFTER completion only — never during a stretch. Frequency-capped.
+      AdService.instance.onRoutineComplete();
     } else {
       setState(() => _resting = true);
     }
@@ -114,7 +119,13 @@ class _RoutinePlayerScreenState extends State<RoutinePlayerScreen> {
                         .titleMedium
                         ?.copyWith(color: scheme.primary)),
                 const SizedBox(height: AppSpacing.lg),
-                VisualPlaceholder(stretch: s, height: 170),
+                ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 200, maxHeight: 200),
+                  child: AspectRatio(
+                    aspectRatio: 1,
+                    child: VisualPlaceholder(stretch: s),
+                  ),
+                ),
                 const SizedBox(height: AppSpacing.lg),
                 HoldTimerRing(
                   key: ValueKey('seg_$_i'),

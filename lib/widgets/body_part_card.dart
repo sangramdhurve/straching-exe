@@ -39,7 +39,6 @@ class BodyPartCard extends StatelessWidget {
                 child: Icon(bodyPart.icon, color: scheme.primary),
               ),
               const Spacer(),
-              const SizedBox(height: AppSpacing.md),
               Text(
                 bodyPart.name,
                 style: Theme.of(context).textTheme.titleMedium,

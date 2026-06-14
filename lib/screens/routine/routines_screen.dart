@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../core/constants/app_constants.dart';
 import '../../data/content_repository.dart';
 import '../../models/routine.dart';
+import '../../widgets/banner_ad_slot.dart';
 import 'routine_player_screen.dart';
 
 /// Browse all guided routines.
@@ -14,10 +15,17 @@ class RoutinesScreen extends StatelessWidget {
     final routines = ContentRepository.instance.routines;
     return Scaffold(
       appBar: AppBar(title: const Text('Routines')),
-      body: ListView.builder(
-        padding: const EdgeInsets.all(AppSpacing.md),
-        itemCount: routines.length,
-        itemBuilder: (context, i) => _RoutineCard(routine: routines[i]),
+      body: Column(
+        children: [
+          Expanded(
+            child: ListView.builder(
+              padding: const EdgeInsets.all(AppSpacing.md),
+              itemCount: routines.length,
+              itemBuilder: (context, i) => _RoutineCard(routine: routines[i]),
+            ),
+          ),
+          const BannerAdSlot(),
+        ],
       ),
     );
   }

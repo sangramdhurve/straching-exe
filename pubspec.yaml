@@ -12,9 +12,11 @@ dependencies:
   cupertino_icons: ^1.0.6
   google_fonts: ^6.2.1          # Plus Jakarta Sans + Inter (see app_theme.dart)
   shared_preferences: ^2.2.3    # favorites, settings, streak (on-device, no backend)
-  lottie: ^3.1.2                # vector animations (future visual upgrade)
-  video_player: ^2.9.1          # mp4 stretch loops (future visual upgrade)
-  google_mobile_ads: ^5.1.0     # AdMob (kept disabled until you add your IDs — see CLAUDE.md)
+  # AdMob. Range >=7.0.0 carries the Gradle-9 fix (5.x broke on Gradle 9/AGP 9);
+  # pub auto-picks the newest your Flutter supports (up to 9.x). Test IDs only for now.
+  google_mobile_ads: '>=7.0.0 <10.0.0'
+  # Added later, when needed:
+  #   lottie / video_player  -> when you add animated or mp4 visuals
 
 dev_dependencies:
   flutter_test:

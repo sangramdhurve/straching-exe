@@ -81,12 +81,16 @@ flutter run
 Note: `flutter create .` will NOT overwrite existing lib/, pubspec.yaml, or assets.
 google_fonts downloads fonts on first run (needs internet once); bundle them later for full offline.
 
-## Monetization (AdMob) — wired but OFF by default
-- `AdConfig` in `app_constants.dart` holds Google **test** ad unit IDs; `AdConfig.enabled = false`.
-- Ads UX rule (NON-NEGOTIABLE): never during a stretch/timer. Place interstitial/rewarded only
-  at the **routine completion screen** (marked with a NOTE comment) and banners on browse lists.
-- Before enabling: add `google_mobile_ads` init in `main()`, set real IDs, target audience **13+**
-  (NOT "for children" — keeps ads unrestricted; see strategy doc §8).
+## Monetization (AdMob) — WIRED, test mode
+- Dependency: `google_mobile_ads: '>=7.0.0 <10.0.0'` (7.0.0+ fixes the Gradle-9/AGP-9 build break that
+  5.x caused). pub auto-picks the newest your Flutter supports.
+- `AdService` (`lib/core/ad_service.dart`) inits in `main()`, preloads + shows interstitials.
+  `BannerAdSlot` (`lib/widgets/`) renders banners. `AdConfig.enabled = true` with Google **test** IDs.
+- Placement: banners at the bottom of Routines + body-part lists; interstitial only at routine
+  completion, frequency-capped (`AdConfig.interstitialEveryNCompletions`). NEVER during a stretch/timer.
+- Native: test AdMob App IDs in AndroidManifest (`APPLICATION_ID`) + iOS Info.plist (`GADApplicationIdentifier`).
+- Before production: replace ALL test IDs (units in `AdConfig` + app IDs in manifest/plist) with your real
+  AdMob IDs, and set store target audience **13+** (not "for children"; strategy doc §8).
 
 ## Before launch (checklist)
 1. Host a **privacy policy** (required by stores + AdMob) and wire it in Settings via `url_launcher`.

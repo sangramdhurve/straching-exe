@@ -5,12 +5,11 @@ import '../models/body_part.dart';
 import '../models/stretch.dart';
 
 /// Shows the stretch's illustration if present, otherwise a friendly
-/// tinted placeholder. This lets the app run before real visuals are added —
-/// drop a PNG at [Stretch.assetFile] and it appears automatically.
+/// tinted placeholder. Fills its parent — wrap it in a sized/aspect-ratio box.
+/// The illustrations are square (1:1), so give it a square box to avoid cropping.
 class VisualPlaceholder extends StatelessWidget {
   final Stretch stretch;
-  final double? height;
-  const VisualPlaceholder({super.key, required this.stretch, this.height});
+  const VisualPlaceholder({super.key, required this.stretch});
 
   @override
   Widget build(BuildContext context) {
@@ -22,11 +21,10 @@ class VisualPlaceholder extends StatelessWidget {
       borderRadius: BorderRadius.circular(20),
       child: Image.asset(
         stretch.assetFile,
-        height: height,
         width: double.infinity,
+        height: double.infinity,
         fit: BoxFit.cover,
         errorBuilder: (context, error, stack) => Container(
-          height: height,
           color: tint,
           alignment: Alignment.center,
           child: Column(

@@ -33,8 +33,12 @@ class AppDurations {
 class AdConfig {
   AdConfig._();
 
-  /// Master switch. Keep false until google_mobile_ads is initialized in main().
-  static const bool enabled = false;
+  /// Master switch for ads. Currently ON using Google TEST ad units (safe to view/tap).
+  /// Replace the IDs below with your real AdMob units before production, and keep this true.
+  static const bool enabled = true;
+
+  /// Gentle cadence: show an interstitial only once every N routine completions.
+  static const int interstitialEveryNCompletions = 2;
 
   // ---- Android test units ----
   static const String androidBanner = 'ca-app-pub-3940256099942544/6300978111';

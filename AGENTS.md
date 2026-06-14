@@ -36,6 +36,9 @@ Checks JSON parses, required fields exist, and every routine stretchId resolves.
 - For video later: add the mp4, set the stretch's `assetType` to `video`, and extend `VisualPlaceholder`/add a video widget.
 
 ## Progress log (newest first)
+- 2026-06-14 (d) — Wired AdMob in TEST mode: google_mobile_ads `>=7.0.0 <10.0.0` (fixes Gradle-9 break),
+  AdService + BannerAdSlot, banners on browse screens, frequency-capped interstitial at routine
+  completion, native app IDs in manifest + Info.plist. No ads on stretch/timer screens.
 - 2026-06-14 (c) — Generated 45 flat stretch illustrations + app icon (tools/generate_visuals.py),
   added flutter_launcher_icons config, wrote store listing + ASO (docs/STORE-LISTING.md).
 - 2026-06-14 (b) — Expanded content to 45 stretches (5 per section) + 9 routines.

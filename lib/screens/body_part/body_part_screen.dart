@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../core/constants/app_constants.dart';
 import '../../data/content_repository.dart';
 import '../../models/body_part.dart';
+import '../../widgets/banner_ad_slot.dart';
 import '../../widgets/stretch_tile.dart';
 import '../stretch/stretch_detail_screen.dart';
 
@@ -62,6 +63,7 @@ class _BodyPartScreenState extends State<BodyPartScreen> {
               ),
             ),
           ),
+          const BannerAdSlot(),
         ],
       ),
     );

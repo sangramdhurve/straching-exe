@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'core/ad_service.dart';
 import 'core/app_state.dart';
 import 'core/theme/app_theme.dart';
 import 'data/content_repository.dart';
@@ -11,6 +12,8 @@ Future<void> main() async {
   // Load bundled content + saved user state before first frame.
   await ContentRepository.instance.load();
   await AppState.instance.load();
+  // Initialize AdMob (no-op if ads are disabled). Safe to await — it's quick.
+  await AdService.instance.init();
   runApp(const StretchHomeApp());
 }
 
