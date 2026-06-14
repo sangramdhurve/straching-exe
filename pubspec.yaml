@@ -1,0 +1,39 @@
+name: stretchhome
+description: "StretchHome — free full-body home stretching for all ages. Stretching only, with simple household props."
+publish_to: 'none'
+version: 0.1.0+1
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.6
+  google_fonts: ^6.2.1          # Plus Jakarta Sans + Inter (see app_theme.dart)
+  shared_preferences: ^2.2.3    # favorites, settings, streak (on-device, no backend)
+  lottie: ^3.1.2                # vector animations (future visual upgrade)
+  video_player: ^2.9.1          # mp4 stretch loops (future visual upgrade)
+  google_mobile_ads: ^5.1.0     # AdMob (kept disabled until you add your IDs — see CLAUDE.md)
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  flutter_launcher_icons: ^0.13.1   # run: dart run flutter_launcher_icons
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/data/
+    - assets/visuals/
+
+# App icon generation. After `flutter pub get`, run:
+#   dart run flutter_launcher_icons
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon/app_icon.png"
+  adaptive_icon_background: "#2A9D8F"
+  adaptive_icon_foreground: "assets/icon/app_icon_foreground.png"
+  remove_alpha_ios: true
