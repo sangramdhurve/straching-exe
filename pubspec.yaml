@@ -15,6 +15,7 @@ dependencies:
   # AdMob. Range >=7.0.0 carries the Gradle-9 fix (5.x broke on Gradle 9/AGP 9);
   # pub auto-picks the newest your Flutter supports (up to 9.x). Test IDs only for now.
   google_mobile_ads: '>=7.0.0 <10.0.0'
+  url_launcher: ^6.3.0           # open the hosted privacy policy from Settings
   # Added later, when needed:
   #   lottie / video_player  -> when you add animated or mp4 visuals
 

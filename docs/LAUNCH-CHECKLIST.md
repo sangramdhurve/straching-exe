@@ -19,8 +19,10 @@
 1. **Pick the app package/bundle ID** (permanent — can't change after publishing).
    Currently the placeholder `com.example.stretchhome`. Tell me your choice (e.g.
    `com.stretchhome.app`) and I'll set it in ~1 minute.
-2. **Host the privacy policy** (free): put `docs/legal/privacy-policy.html` on GitHub Pages,
-   Google Sites, or Netlify Drop. Send me the public URL — I'll wire it into Settings.
+2. ✅ **Privacy policy hosted + wired.** Live at
+   `https://sangramdhurve.github.io/stretchhome-legal/privacy-policy.html` (GitHub Pages) and
+   opened from Settings via `url_launcher`. Reuse this exact URL in Play Console, App Store
+   Connect, and AdMob. (Use the `github.io` URL, never the `github.com` code URL.)
 3. **Create developer accounts:** Google Play ($25 one-time), Apple ($99/yr if launching iOS).
 4. **Create an AdMob account** → get your real App IDs + ad unit IDs. Send them to me; I swap the
    test IDs (in `AdConfig`, AndroidManifest, Info.plist) for your real ones and set target

@@ -59,3 +59,12 @@ class PrefKeys {
   static const String streakCount = 'streak_count';
   static const String lastStretchDate = 'last_stretch_date';
 }
+
+/// Hosted links opened from the app (GitHub Pages).
+class Links {
+  Links._();
+  static const String privacyPolicy =
+      'https://sangramdhurve.github.io/stretchhome-legal/privacy-policy.html';
+  static const String healthDisclaimer =
+      'https://sangramdhurve.github.io/stretchhome-legal/health-disclaimer.html';
+}

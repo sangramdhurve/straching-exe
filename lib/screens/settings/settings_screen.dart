@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../core/app_state.dart';
 import '../../core/constants/app_constants.dart';
@@ -40,8 +41,8 @@ class SettingsScreen extends StatelessWidget {
             ListTile(
               leading: const Icon(Icons.privacy_tip_outlined),
               title: const Text('Privacy policy'),
-              subtitle: const Text('Required before adding ads'),
-              onTap: () => _showPrivacyNote(context),
+              subtitle: const Text('Opens in your browser'),
+              onTap: () => _openUrl(Links.privacyPolicy),
             ),
             const ListTile(
               leading: Icon(Icons.info_outline),
@@ -114,22 +115,8 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
-  void _showPrivacyNote(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        title: const Text('Privacy policy'),
-        content: const Text(
-          'Host your privacy policy online and link it here (use url_launcher). '
-          'A public policy is required by Google Play, the App Store, and AdMob '
-          'before you ship ads. See CLAUDE.md → "Before launch" for the steps.',
-        ),
-        actions: [
-          TextButton(
-              onPressed: () => Navigator.pop(ctx),
-              child: const Text('Close')),
-        ],
-      ),
-    );
+  Future<void> _openUrl(String url) async {
+    final uri = Uri.parse(url);
+    await launchUrl(uri, mode: LaunchMode.externalApplication);
   }
 }
