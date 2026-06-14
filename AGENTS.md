@@ -36,6 +36,11 @@ Checks JSON parses, required fields exist, and every routine stretchId resolves.
 - For video later: add the mp4, set the stretch's `assetType` to `video`, and extend `VisualPlaceholder`/add a video widget.
 
 ## Progress log (newest first)
+- 2026-06-14 (e) — 3D pipeline proven via Blender MCP. Studio scene (floor/lights/teal world/
+  square cam) in `assets/blender/`. Realistic Mixamo characters import (character_female.fbx /
+  character_male.fbx). Best path = Mixamo ANIMATIONS (With Skin) dropped in `assets/blender/anims/`;
+  Blender 5.1 has no FFMPEG output, so render PNG seq to renders/seq/ then encode with sandbox ffmpeg.
+  First clip done: "Arm Stretching" -> renders/arm_stretch.mp4 (maps to cross_body_shoulder).
 - 2026-06-14 (d) — Wired AdMob in TEST mode: google_mobile_ads `>=7.0.0 <10.0.0` (fixes Gradle-9 break),
   AdService + BannerAdSlot, banners on browse screens, frequency-capped interstitial at routine
   completion, native app IDs in manifest + Info.plist. No ads on stretch/timer screens.

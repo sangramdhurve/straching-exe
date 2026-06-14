@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 /// 4pt-based spacing scale.
 class AppSpacing {
   AppSpacing._();

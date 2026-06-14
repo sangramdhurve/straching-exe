@@ -76,12 +76,14 @@ class SettingsScreen extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             for (final m in ThemeMode.values)
-              RadioListTile<ThemeMode>(
-                value: m,
-                groupValue: state.themeMode,
+              ListTile(
                 title: Text(_themeLabel(m)),
-                onChanged: (v) {
-                  if (v != null) state.setThemeMode(v);
+                trailing: state.themeMode == m
+                    ? Icon(Icons.check,
+                        color: Theme.of(ctx).colorScheme.primary)
+                    : null,
+                onTap: () {
+                  state.setThemeMode(m);
                   Navigator.pop(ctx);
                 },
               ),

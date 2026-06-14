@@ -54,7 +54,11 @@ lib/
 assets/
   data/stretches.json   45 stretches (5 per section) across 9 body sections
   data/routines.json    9 routines (every stretchId must exist in stretches.json)
-  visuals/              45 generated flat illustrations <id>.png (tools/generate_visuals.py)
+  visuals/              45 flat illustrations <id>.png (tools/generate_visuals.py).
+                        A stretch's assetFile may be <id>.png (2D) OR <id>.gif (3D loop from Blender).
+                        Image.asset plays GIFs natively (no plugin). cross_body_shoulder.gif = first 3D clip.
+  blender/              Mixamo chars (character_female/male.fbx), anims/ (Mixamo animation FBX),
+                        renders/ (PNG seq + ffmpeg-encoded mp4/gif). Drive via Blender MCP; encode in sandbox.
   icon/                 app_icon.png + adaptive foreground (flutter_launcher_icons)
 ```
 

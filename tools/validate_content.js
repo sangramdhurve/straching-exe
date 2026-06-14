@@ -38,8 +38,8 @@ for (const s of data.stretches) {
   for (const p of s.props || []) {
     if (!validProps.has(p)) err(`stretch "${s.id}" bad prop "${p}"`);
   }
-  if (s.assetFile !== `assets/visuals/${s.id}.png`) {
-    err(`stretch "${s.id}" assetFile should be assets/visuals/${s.id}.png`);
+  if (!new RegExp(`^assets/visuals/${s.id}\\.(png|gif|webp|mp4)$`).test(s.assetFile)) {
+    err(`stretch "${s.id}" assetFile should be assets/visuals/${s.id}.{png|gif|webp|mp4}`);
   }
 }
 

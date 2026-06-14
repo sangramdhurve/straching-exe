@@ -52,7 +52,7 @@ class AdService {
     final shouldShow = ad != null &&
         _completions % AdConfig.interstitialEveryNCompletions == 0;
     if (shouldShow) {
-      ad!.fullScreenContentCallback = FullScreenContentCallback(
+      ad.fullScreenContentCallback = FullScreenContentCallback(
         onAdDismissedFullScreenContent: (ad) {
           ad.dispose();
           _interstitial = null;
