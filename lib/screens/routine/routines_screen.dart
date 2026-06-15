@@ -4,7 +4,7 @@ import '../../core/constants/app_constants.dart';
 import '../../data/content_repository.dart';
 import '../../models/routine.dart';
 import '../../widgets/banner_ad_slot.dart';
-import 'routine_player_screen.dart';
+import 'routine_detail_screen.dart';
 
 /// Browse all guided routines.
 class RoutinesScreen extends StatelessWidget {
@@ -44,7 +44,7 @@ class _RoutineCard extends StatelessWidget {
         onTap: () => Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (_) => RoutinePlayerScreen(routine: routine)),
+              builder: (_) => RoutineDetailScreen(routine: routine)),
         ),
         child: Padding(
           padding: const EdgeInsets.all(AppSpacing.md),

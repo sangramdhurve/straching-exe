@@ -32,13 +32,21 @@ class BodyPartCard extends StatelessWidget {
               Container(
                 width: 48,
                 height: 48,
+                alignment: Alignment.center,
                 decoration: BoxDecoration(
                   color: tint,
                   borderRadius: BorderRadius.circular(14),
                 ),
-                child: Icon(bodyPart.icon, color: scheme.primary),
+                child: Image.asset(
+                  'assets/icons/bodyparts/${bodyPart.id}.png',
+                  width: 34,
+                  height: 34,
+                  excludeFromSemantics: true,
+                  errorBuilder: (_, __, ___) =>
+                      Icon(bodyPart.icon, color: scheme.primary),
+                ),
               ),
-              const Spacer(),
+              const SizedBox(height: AppSpacing.md),
               Text(
                 bodyPart.name,
                 style: Theme.of(context).textTheme.titleMedium,

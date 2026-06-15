@@ -88,8 +88,34 @@ class ContentRepository {
   }
 
   /// Simple deterministic "today's pick" so it feels fresh but stable per day.
-  Routine? get dailySuggestion {
+  Routine? get dailySuggestion => dailySuggestionFor(null);
+
+  /// "Today's pick", optionally biased toward routines the user can actually do
+  /// with the props they have at home. Deterministic per day so it stays stable.
+  ///
+  /// Pass null (or an empty/unconfigured set) to suggest from all routines.
+  /// "none" (floor, no props) is always treated as available, and if no routine
+  /// is fully doable with the given props we fall back to all routines — so the
+  /// home card never disappears.
+  Routine? dailySuggestionFor(Set<String>? availableProps) {
     if (_routines.isEmpty) return null;
-    return _routines[DateTime.now().day % _routines.length];
+    var pool = _routines;
+    if (availableProps != null) {
+      final have = {...availableProps, 'none'};
+      final doable = _routines
+          .where((r) => _propsForRoutine(r).every(have.contains))
+          .toList();
+      if (doable.isNotEmpty) pool = doable;
+    }
+    return pool[DateTime.now().day % pool.length];
+  }
+
+  /// Every distinct prop a routine needs across its stretches (excluding "none").
+  Set<String> _propsForRoutine(Routine r) {
+    final set = <String>{};
+    for (final s in stretchesForRoutine(r)) {
+      set.addAll(s.props.where((p) => p != 'none'));
+    }
+    return set;
   }
 }

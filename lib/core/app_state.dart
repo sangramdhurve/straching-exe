@@ -12,14 +12,25 @@ class AppState extends ChangeNotifier {
   SharedPreferences? _prefs;
   final Set<String> _favorites = {};
   bool _largeText = false;
+  bool _reduceMotion = false;
   ThemeMode _themeMode = ThemeMode.system;
   int _streak = 0;
   bool onboardingDone = false;
+  final Set<String> _availableProps = {};
+  bool _propsConfigured = false;
 
   Set<String> get favorites => _favorites;
   bool get largeText => _largeText;
+  bool get reduceMotion => _reduceMotion;
   ThemeMode get themeMode => _themeMode;
   int get streak => _streak;
+
+  /// Optional props the user said they have at home (chair/wall/table/towel/bag).
+  /// "none" (floor) is always implicitly available.
+  Set<String> get availableProps => _availableProps;
+
+  /// True once the user has answered the onboarding "what do you have?" step.
+  bool get propsConfigured => _propsConfigured;
 
   Future<void> load() async {
     _prefs = await SharedPreferences.getInstance();
@@ -29,6 +40,11 @@ class AppState extends ChangeNotifier {
       ..clear()
       ..addAll(p.getStringList(PrefKeys.favorites) ?? const []);
     _largeText = p.getBool(PrefKeys.largeText) ?? false;
+    _reduceMotion = p.getBool(PrefKeys.reduceMotion) ?? false;
+    _availableProps
+      ..clear()
+      ..addAll(p.getStringList(PrefKeys.availableProps) ?? const []);
+    _propsConfigured = p.getBool(PrefKeys.propsConfigured) ?? false;
     _themeMode = _parseTheme(p.getString(PrefKeys.themeMode));
     _streak = p.getInt(PrefKeys.streakCount) ?? 0;
     notifyListeners();
@@ -45,6 +61,24 @@ class AppState extends ChangeNotifier {
   Future<void> setLargeText(bool v) async {
     _largeText = v;
     await _prefs?.setBool(PrefKeys.largeText, v);
+    notifyListeners();
+  }
+
+  Future<void> setReduceMotion(bool v) async {
+    _reduceMotion = v;
+    await _prefs?.setBool(PrefKeys.reduceMotion, v);
+    notifyListeners();
+  }
+
+  /// Persist the props the user has at home; marks prop preferences as configured.
+  Future<void> setAvailableProps(Set<String> props) async {
+    _availableProps
+      ..clear()
+      ..addAll(props);
+    _propsConfigured = true;
+    await _prefs?.setStringList(
+        PrefKeys.availableProps, _availableProps.toList());
+    await _prefs?.setBool(PrefKeys.propsConfigured, true);
     notifyListeners();
   }
 

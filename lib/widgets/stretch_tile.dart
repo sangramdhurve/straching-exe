@@ -43,11 +43,13 @@ class StretchTile extends StatelessWidget {
           ),
         ),
         trailing: onFavorite == null
-            ? const Icon(Icons.chevron_right)
+            ? const ExcludeSemantics(child: Icon(Icons.chevron_right))
             : IconButton(
+                tooltip:
+                    isFavorite ? 'Remove from favorites' : 'Add to favorites',
                 icon: Icon(
                   isFavorite ? Icons.favorite : Icons.favorite_border,
-                  color: isFavorite ? scheme.error : scheme.onSurfaceVariant,
+                  color: isFavorite ? scheme.primary : scheme.onSurfaceVariant,
                 ),
                 onPressed: onFavorite,
               ),

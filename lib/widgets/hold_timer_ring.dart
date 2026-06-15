@@ -3,10 +3,15 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 /// The hero component: a circular countdown ring for holding a stretch.
-/// Tap to pause/resume. Calls [onComplete] when the hold finishes.
+/// Tap the ring (or the Pause button) to pause/resume.
+/// Calls [onComplete] when the hold finishes; [onSkip] (if given) renders a Skip button.
+///
+/// Accessibility: the ring is a live region announcing the remaining time (~every 5s),
+/// and the Restart / Pause / Skip controls are labeled, focusable buttons (≥48dp).
 class HoldTimerRing extends StatefulWidget {
   final int seconds;
   final VoidCallback? onComplete;
+  final VoidCallback? onSkip;
   final String? centerLabel;
   final bool autoStart;
 
@@ -14,6 +19,7 @@ class HoldTimerRing extends StatefulWidget {
     super.key,
     required this.seconds,
     this.onComplete,
+    this.onSkip,
     this.centerLabel,
     this.autoStart = true,
   });
@@ -49,61 +55,111 @@ class _HoldTimerRingState extends State<HoldTimerRing>
       if (_c.isAnimating) {
         _c.stop();
       } else {
-        if (_c.isCompleted) {
-          _c.forward(from: 0);
-        } else {
-          _c.forward();
-        }
+        _c.isCompleted ? _c.forward(from: 0) : _c.forward();
       }
     });
   }
 
+  void _restart() => setState(() => _c.forward(from: 0));
+
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
-    return AnimatedBuilder(
-      animation: _c,
-      builder: (context, _) {
-        final remaining = (widget.seconds * (1 - _c.value)).ceil();
-        return GestureDetector(
-          onTap: _toggle,
-          child: SizedBox(
-            width: 232,
-            height: 232,
-            child: CustomPaint(
-              painter: _RingPainter(
-                progress: _c.value,
-                color: scheme.primary,
-                track: scheme.primary.withValues(alpha: 0.14),
-              ),
-              child: Center(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      '$remaining',
-                      style: Theme.of(context)
-                          .textTheme
-                          .displaySmall
-                          ?.copyWith(fontSize: 66, color: scheme.onSurface),
-                    ),
-                    Text(
-                      widget.centerLabel ?? 'seconds',
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: scheme.onSurfaceVariant),
-                    ),
-                    const SizedBox(height: 6),
-                    Icon(
-                      _c.isAnimating ? Icons.pause_rounded : Icons.play_arrow_rounded,
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        AnimatedBuilder(
+          animation: _c,
+          builder: (context, _) {
+            final remaining = (widget.seconds * (1 - _c.value)).ceil();
+            // Announce in ~5s steps so the screen reader isn't chatty.
+            final announce =
+                remaining <= 5 ? remaining : (remaining / 5).round() * 5;
+            return Semantics(
+              container: true,
+              liveRegion: true,
+              label: 'Hold timer',
+              value: '$announce seconds remaining',
+              hint: _c.isAnimating ? 'Double tap to pause' : 'Double tap to resume',
+              onTap: _toggle,
+              child: GestureDetector(
+                onTap: _toggle,
+                child: SizedBox(
+                  width: 232,
+                  height: 232,
+                  child: CustomPaint(
+                    painter: _RingPainter(
+                      progress: _c.value,
                       color: scheme.primary,
+                      track: scheme.primary.withValues(alpha: 0.14),
                     ),
-                  ],
+                    child: Center(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            '$remaining',
+                            style: Theme.of(context)
+                                .textTheme
+                                .displaySmall
+                                ?.copyWith(
+                                    fontSize: 66, color: scheme.onSurface),
+                          ),
+                          Text(
+                            widget.centerLabel ?? 'seconds',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium
+                                ?.copyWith(color: scheme.onSurfaceVariant),
+                          ),
+                          const SizedBox(height: 6),
+                          Icon(
+                            _c.isAnimating
+                                ? Icons.pause_rounded
+                                : Icons.play_arrow_rounded,
+                            color: scheme.primary,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
               ),
+            );
+          },
+        ),
+        const SizedBox(height: 16),
+        // Labeled, focusable controls (switch-access / screen-reader friendly).
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            IconButton(
+              tooltip: 'Restart',
+              onPressed: _restart,
+              icon: const Icon(Icons.replay_rounded),
             ),
-          ),
-        );
-      },
+            const SizedBox(width: 8),
+            AnimatedBuilder(
+              animation: _c,
+              builder: (context, _) => IconButton.filledTonal(
+                tooltip: _c.isAnimating ? 'Pause' : 'Resume',
+                onPressed: _toggle,
+                icon: Icon(_c.isAnimating
+                    ? Icons.pause_rounded
+                    : Icons.play_arrow_rounded),
+              ),
+            ),
+            if (widget.onSkip != null) ...[
+              const SizedBox(width: 8),
+              IconButton(
+                tooltip: 'Skip',
+                onPressed: widget.onSkip,
+                icon: const Icon(Icons.skip_next_rounded),
+              ),
+            ],
+          ],
+        ),
+      ],
     );
   }
 }
@@ -135,7 +191,6 @@ class _RingPainter extends CustomPainter {
       ..strokeCap = StrokeCap.round;
 
     canvas.drawCircle(center, radius, trackPaint);
-    // Arc shrinks clockwise as the hold counts down.
     final sweep = 2 * math.pi * (1 - progress);
     canvas.drawArc(
       Rect.fromCircle(center: center, radius: radius),

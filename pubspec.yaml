@@ -30,6 +30,7 @@ flutter:
   assets:
     - assets/data/
     - assets/visuals/
+    - assets/icons/bodyparts/
 
 # App icon generation. After `flutter pub get`, run:
 #   dart run flutter_launcher_icons

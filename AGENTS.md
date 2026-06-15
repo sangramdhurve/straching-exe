@@ -36,6 +36,32 @@ Checks JSON parses, required fields exist, and every routine stretchId resolves.
 - For video later: add the mp4, set the stretch's `assetType` to `video`, and extend `VisualPlaceholder`/add a video widget.
 
 ## Progress log (newest first)
+- 2026-06-15 (h) — Shipped P2 (docs/UX-REVIEW.md). Prop personalization: onboarding "What do you have
+  nearby?" step + Settings → Personalize → "Home props" editor, persisted as AppState.availableProps
+  (+ propsConfigured). Prop-aware "Today's Pick": ContentRepository.dailySuggestionFor() filters
+  routines to those doable with the user's props (floor/"none" always allowed; falls back to all so the
+  card never disappears); Home passes the set in (repo stays AppState-free). Completion "bloom":
+  animated check + radial glow, honors reduce-motion. Custom body-map body-part icons: 9 consistent
+  silhouettes with the target region in teal (tools/generate_bodypart_icons.py → assets/icons/bodyparts/,
+  declared in pubspec), wired into BodyPartCard via Image.asset with an Icon fallback +
+  excludeFromSemantics. Two verify agents (code review + UX) caught a silently-failed edit
+  (dailySuggestionFor was never written to disk) — fixed — plus unified onboarding⇄settings prop
+  copy/chip style and added an "All props" summary. Still pending: ONE character language across all 45
+  (blocked on more Mixamo animations), app-icon redesign, "Quick Relief" tap-the-pain micro-routine.
+- 2026-06-14 (g) — Shipped P1 (docs/UX-REVIEW.md): Search screen (empty = browse-all) + Home search
+  bar; prop+level filter chips with labels + "Clear filters"; Routine preview screen (routines list +
+  daily card now route here, then Start → player); rest-screen next-stretch thumbnail; completion
+  stats (stretches/minutes/streak, "nice start" on day 1); Settings "Send feedback"; unified
+  illustration backgrounds (regenerated all 45). Two verify agents (code review + UX flow) →
+  fixed launchUrl error handling + 5 UX micro-wins. Next: P2 (one character language for all 45,
+  custom body-part icons, onboarding personalization, prop-aware "today's pick", icon redesign).
+- 2026-06-14 (f) — Multi-agent design review (docs/UX-REVIEW.md). Implemented all P0 fixes:
+  teal favorite (was red), body-part card clipping fix, pinned onSurfaceVariant (AA contrast) +
+  headlineLarge font, timer ring Pause/Restart/Skip controls + Semantics live region, reduce-motion
+  (AppState + Settings toggle + GIF→PNG fallback), routine-player exit confirm + 400ms-delayed
+  interstitial. Two verification agents (code review + a11y recheck) found follow-ups, all fixed:
+  reactive reduce-motion, step-badge contrast, progress-bar label, decorative-chevron exclusion,
+  dialog autofocus. P1/P2 backlog remains in UX-REVIEW.md.
 - 2026-06-14 (e) — 3D pipeline proven via Blender MCP. Studio scene (floor/lights/teal world/
   square cam) in `assets/blender/`. Realistic Mixamo characters import (character_female.fbx /
   character_male.fbx). Best path = Mixamo ANIMATIONS (With Skin) dropped in `assets/blender/anims/`;

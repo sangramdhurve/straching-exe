@@ -7,7 +7,8 @@ import '../../data/content_repository.dart';
 import '../../models/routine.dart';
 import '../../widgets/body_part_card.dart';
 import '../body_part/body_part_screen.dart';
-import '../routine/routine_player_screen.dart';
+import '../routine/routine_detail_screen.dart';
+import '../search/search_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -23,7 +24,9 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final repo = ContentRepository.instance;
     final scheme = Theme.of(context).colorScheme;
-    final daily = repo.dailySuggestion;
+    final st = AppState.instance;
+    final daily = repo
+        .dailySuggestionFor(st.propsConfigured ? st.availableProps : null);
     final parts = repo.bodyParts;
 
     return Scaffold(
@@ -59,6 +62,8 @@ class HomeScreen extends StatelessWidget {
               },
             ),
             const SizedBox(height: AppSpacing.lg),
+            _searchBar(context),
+            const SizedBox(height: AppSpacing.lg),
             if (daily != null) _dailyCard(context, daily),
             const SizedBox(height: AppSpacing.lg),
             Text('Stretch by body part',
@@ -72,7 +77,7 @@ class HomeScreen extends StatelessWidget {
                 crossAxisCount: 2,
                 mainAxisSpacing: AppSpacing.md,
                 crossAxisSpacing: AppSpacing.md,
-                childAspectRatio: 1.0,
+                childAspectRatio: 0.85,
               ),
               itemCount: parts.length,
               itemBuilder: (context, i) {
@@ -90,6 +95,32 @@ class HomeScreen extends StatelessWidget {
               },
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _searchBar(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+    return Material(
+      color: scheme.surfaceContainerHighest,
+      borderRadius: BorderRadius.circular(AppRadii.button),
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        onTap: () => Navigator.push(context,
+            MaterialPageRoute(builder: (_) => const SearchScreen())),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+              horizontal: AppSpacing.md, vertical: 14),
+          child: Row(
+            children: [
+              Icon(Icons.search, color: scheme.onSurfaceVariant),
+              const SizedBox(width: AppSpacing.sm),
+              Text('Search stretches',
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      color: scheme.onSurfaceVariant)),
+            ],
+          ),
         ),
       ),
     );
@@ -121,7 +152,7 @@ class HomeScreen extends StatelessWidget {
         onTap: () => Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (_) => RoutinePlayerScreen(routine: daily)),
+              builder: (_) => RoutineDetailScreen(routine: daily)),
         ),
         child: Padding(
           padding: const EdgeInsets.all(AppSpacing.lg),
@@ -146,7 +177,7 @@ class HomeScreen extends StatelessWidget {
               const SizedBox(height: AppSpacing.md),
               Row(
                 children: [
-                  const Icon(Icons.play_circle_fill, color: Colors.white),
+                  const Icon(Icons.arrow_forward_rounded, color: Colors.white),
                   const SizedBox(width: 8),
                   Text(
                     '${daily.minutes} min • ${daily.stretchIds.length} stretches',

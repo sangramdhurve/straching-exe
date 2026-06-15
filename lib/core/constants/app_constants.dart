@@ -58,6 +58,9 @@ class PrefKeys {
   static const String themeMode = 'theme_mode'; // system | light | dark
   static const String streakCount = 'streak_count';
   static const String lastStretchDate = 'last_stretch_date';
+  static const String reduceMotion = 'reduce_motion';
+  static const String availableProps = 'available_props';
+  static const String propsConfigured = 'props_configured';
 }
 
 /// Hosted links opened from the app (GitHub Pages).

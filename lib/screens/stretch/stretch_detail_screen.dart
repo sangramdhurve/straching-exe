@@ -53,7 +53,7 @@ class _StretchDetailScreenState extends State<StretchDetailScreen> {
               return IconButton(
                 tooltip: fav ? 'Remove from favorites' : 'Add to favorites',
                 icon: Icon(fav ? Icons.favorite : Icons.favorite_border,
-                    color: fav ? scheme.error : null),
+                    color: fav ? scheme.primary : null),
                 onPressed: () => AppState.instance.toggleFavorite(s.id),
               );
             },
@@ -145,7 +145,6 @@ class _StretchDetailScreenState extends State<StretchDetailScreen> {
       ],
       selected: {_level},
       onSelectionChanged: (sel) => setState(() => _level = sel.first),
-      showSelectedIcon: false,
     );
   }
 
@@ -190,7 +189,7 @@ class _StretchDetailScreenState extends State<StretchDetailScreen> {
             ),
             child: Text('$n',
                 style: TextStyle(
-                    color: scheme.primary, fontWeight: FontWeight.w700)),
+                    color: scheme.onSurface, fontWeight: FontWeight.w700)),
           ),
           const SizedBox(width: AppSpacing.md),
           Expanded(

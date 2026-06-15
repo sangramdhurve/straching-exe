@@ -205,7 +205,8 @@ def wrap(d, text, fnt, maxw):
     return lines
 
 def render_stretch(stretch):
-    img = Image.new("RGB", (S, S), TINTS.get(stretch["bodyPartId"], (235, 242, 241)))
+    # Unified background tint for ALL stretches (kills the home-grid "patchwork").
+    img = Image.new("RGB", (S, S), (236, 242, 241))
     d = ImageDraw.Draw(img, "RGBA")
     # soft inner card
     pad = int(.05 * S)

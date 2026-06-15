@@ -23,6 +23,9 @@ class AppTheme {
       secondary: AppColors.accent,
       tertiary: AppColors.success,
       surface: isDark ? AppColors.surfaceDark : AppColors.surfaceLight,
+      // Pinned for WCAG AA contrast of captions/sub-labels on light surfaces.
+      onSurfaceVariant:
+          isDark ? const Color(0xFFAFC6C1) : const Color(0xFF4A6966),
       error: AppColors.error,
     );
 
@@ -30,6 +33,8 @@ class AppTheme {
     final textTheme = GoogleFonts.interTextTheme(base).copyWith(
       displaySmall: GoogleFonts.plusJakartaSans(
           textStyle: base.displaySmall, fontWeight: FontWeight.w700),
+      headlineLarge: GoogleFonts.plusJakartaSans(
+          textStyle: base.headlineLarge, fontWeight: FontWeight.w700),
       headlineMedium: GoogleFonts.plusJakartaSans(
           textStyle: base.headlineMedium, fontWeight: FontWeight.w700),
       headlineSmall: GoogleFonts.plusJakartaSans(

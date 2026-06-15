@@ -112,5 +112,11 @@ google_fonts downloads fonts on first run (needs internet once); bundle them lat
 - DONE: scaffold, theme, models, repository, all core screens, 45 stretches, 9 routines, docs,
   design system, privacy policy + health disclaimer (`docs/legal/`), 45 generated illustrations +
   app icon (`tools/generate_visuals.py`, launcher config in pubspec), store listing (`docs/STORE-LISTING.md`).
+- DONE (UX passes, `docs/UX-REVIEW.md`): P0 accessibility; P1 search/preview/filters; P2 = prop-aware
+  "Today's Pick" + onboarding "Home props" step + Settings editor (`AppState.availableProps`),
+  completion "bloom", and 9 custom body-map body-part icons (`tools/generate_bodypart_icons.py` →
+  `assets/icons/bodyparts/`, wired in `BodyPartCard`).
 - NEXT: user runs app on Mac (Phase 1) + `dart run flutter_launcher_icons`; replace illustrations with
-  photos/MP4s; wire AdMob (after base app confirmed); host privacy policy; device testing; store submit.
+  photos/MP4s (ONE character language for all 45 still pending more Mixamo anims); wire AdMob (after base
+  app confirmed); host privacy policy; device testing; store submit. Optional P2 leftovers: app-icon
+  redesign, "Quick Relief" tap-the-pain micro-routine.
