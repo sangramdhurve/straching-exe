@@ -27,18 +27,22 @@ class _BannerAdSlotState extends State<BannerAdSlot> {
 
   void _load() {
     if (!AdConfig.enabled || !AdService.instance.isReady) return;
-    final ad = BannerAd(
-      size: AdSize.banner,
-      adUnitId: AdService.instance.bannerUnitId,
-      request: const AdRequest(),
-      listener: BannerAdListener(
-        onAdLoaded: (_) {
-          if (mounted) setState(() => _loaded = true);
-        },
-        onAdFailedToLoad: (ad, err) => ad.dispose(),
-      ),
-    )..load();
-    _ad = ad;
+    try {
+      final ad = BannerAd(
+        size: AdSize.banner,
+        adUnitId: AdService.instance.bannerUnitId,
+        request: const AdRequest(),
+        listener: BannerAdListener(
+          onAdLoaded: (_) {
+            if (mounted) setState(() => _loaded = true);
+          },
+          onAdFailedToLoad: (ad, err) => ad.dispose(),
+        ),
+      )..load();
+      _ad = ad;
+    } catch (e) {
+      debugPrint('Banner load failed: $e');
+    }
   }
 
   @override

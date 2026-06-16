@@ -36,10 +36,13 @@ class PropBadge extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(_icon, size: 13, color: scheme.secondary),
+          Icon(_icon, size: 14, color: scheme.secondary),
           const SizedBox(width: 4),
           Text(_label,
-              style: TextStyle(fontSize: 11, color: scheme.onSurface)),
+              style: Theme.of(context)
+                  .textTheme
+                  .labelMedium
+                  ?.copyWith(color: scheme.onSurface)),
         ],
       ),
     );

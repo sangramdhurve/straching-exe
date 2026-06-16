@@ -4,6 +4,7 @@ import '../../core/app_state.dart';
 import '../../core/constants/app_constants.dart';
 import '../../data/content_repository.dart';
 import '../../models/stretch.dart';
+import '../../widgets/responsive.dart';
 import '../../widgets/stretch_tile.dart';
 import '../stretch/stretch_detail_screen.dart';
 
@@ -23,17 +24,20 @@ class FavoritesScreen extends StatelessWidget {
               .whereType<Stretch>()
               .toList();
           if (favs.isEmpty) return _empty(context);
-          return ListView.builder(
-            padding: const EdgeInsets.all(AppSpacing.md),
-            itemCount: favs.length,
-            itemBuilder: (context, i) => StretchTile(
-              stretch: favs[i],
-              isFavorite: true,
-              onFavorite: () => AppState.instance.toggleFavorite(favs[i].id),
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (_) => StretchDetailScreen(stretch: favs[i])),
+          return MaxWidth(
+            child: ListView.builder(
+              padding: const EdgeInsets.fromLTRB(
+                  AppSpacing.md, AppSpacing.md, AppSpacing.md, AppSpacing.xl),
+              itemCount: favs.length,
+              itemBuilder: (context, i) => StretchTile(
+                stretch: favs[i],
+                isFavorite: true,
+                onFavorite: () => AppState.instance.toggleFavorite(favs[i].id),
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (_) => StretchDetailScreen(stretch: favs[i])),
+                ),
               ),
             ),
           );

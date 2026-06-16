@@ -3,6 +3,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../core/app_state.dart';
 import '../../core/constants/app_constants.dart';
+import '../../widgets/responsive.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -14,7 +15,8 @@ class SettingsScreen extends StatelessWidget {
       appBar: AppBar(title: const Text('Settings')),
       body: ListenableBuilder(
         listenable: state,
-        builder: (context, _) => ListView(
+        builder: (context, _) => MaxWidth(
+          child: ListView(
           padding: const EdgeInsets.all(AppSpacing.md),
           children: [
             _label(context, 'Display'),
@@ -74,6 +76,7 @@ class SettingsScreen extends StatelessWidget {
               subtitle: Text('StretchHome 0.1.0 (MVP)'),
             ),
           ],
+        ),
         ),
       ),
     );

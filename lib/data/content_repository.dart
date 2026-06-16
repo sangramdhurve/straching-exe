@@ -105,7 +105,18 @@ class ContentRepository {
       final doable = _routines
           .where((r) => _propsForRoutine(r).every(have.contains))
           .toList();
-      if (doable.isNotEmpty) pool = doable;
+      if (doable.isNotEmpty) {
+        pool = doable;
+      } else {
+        // None are fully doable with the user's props — pick the routine(s)
+        // needing the fewest missing props, so the suggestion stays as
+        // achievable as possible (never an empty/irrelevant card).
+        int missing(Routine r) =>
+            _propsForRoutine(r).where((p) => !have.contains(p)).length;
+        final fewest =
+            _routines.map(missing).reduce((a, b) => a < b ? a : b);
+        pool = _routines.where((r) => missing(r) == fewest).toList();
+      }
     }
     return pool[DateTime.now().day % pool.length];
   }

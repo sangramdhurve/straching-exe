@@ -6,6 +6,7 @@ import '../../core/theme/app_colors.dart';
 import '../../data/content_repository.dart';
 import '../../models/routine.dart';
 import '../../widgets/body_part_card.dart';
+import '../../widgets/responsive.dart';
 import '../body_part/body_part_screen.dart';
 import '../routine/routine_detail_screen.dart';
 import '../search/search_screen.dart';
@@ -31,70 +32,72 @@ class HomeScreen extends StatelessWidget {
 
     return Scaffold(
       body: SafeArea(
-        child: ListView(
-          padding: const EdgeInsets.fromLTRB(
-              AppSpacing.md, AppSpacing.md, AppSpacing.md, AppSpacing.xl),
-          children: [
-            ListenableBuilder(
-              listenable: AppState.instance,
-              builder: (context, _) {
-                final streak = AppState.instance.streak;
-                return Row(
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(_greeting(),
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium
-                                  ?.copyWith(color: scheme.onSurfaceVariant)),
-                          Text('Time to stretch',
-                              style:
-                                  Theme.of(context).textTheme.headlineSmall),
-                        ],
+        child: MaxWidth(
+          child: ListView(
+            padding: const EdgeInsets.fromLTRB(
+                AppSpacing.md, AppSpacing.md, AppSpacing.md, AppSpacing.xl),
+            children: [
+              ListenableBuilder(
+                listenable: AppState.instance,
+                builder: (context, _) {
+                  final streak = AppState.instance.streak;
+                  return Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(_greeting(),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium
+                                    ?.copyWith(color: scheme.onSurfaceVariant)),
+                            Text('Time to stretch',
+                                style:
+                                    Theme.of(context).textTheme.headlineSmall),
+                          ],
+                        ),
                       ),
-                    ),
-                    if (streak > 0) _streakChip(context, streak),
-                  ],
-                );
-              },
-            ),
-            const SizedBox(height: AppSpacing.lg),
-            _searchBar(context),
-            const SizedBox(height: AppSpacing.lg),
-            if (daily != null) _dailyCard(context, daily),
-            const SizedBox(height: AppSpacing.lg),
-            Text('Stretch by body part',
-                style: Theme.of(context).textTheme.titleLarge),
-            const SizedBox(height: AppSpacing.sm),
-            GridView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              gridDelegate:
-                  const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: AppSpacing.md,
-                crossAxisSpacing: AppSpacing.md,
-                childAspectRatio: 0.85,
+                      if (streak > 0) _streakChip(context, streak),
+                    ],
+                  );
+                },
               ),
-              itemCount: parts.length,
-              itemBuilder: (context, i) {
-                final bp = parts[i];
-                return BodyPartCard(
-                  bodyPart: bp,
-                  count: repo.countFor(bp.id),
-                  tint: AppColors.tints[i % AppColors.tints.length],
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (_) => BodyPartScreen(bodyPart: bp)),
-                  ),
-                );
-              },
-            ),
-          ],
+              const SizedBox(height: AppSpacing.lg),
+              _searchBar(context),
+              const SizedBox(height: AppSpacing.lg),
+              if (daily != null) _dailyCard(context, daily),
+              const SizedBox(height: AppSpacing.lg),
+              Text('Stretch by body part',
+                  style: Theme.of(context).textTheme.titleLarge),
+              const SizedBox(height: AppSpacing.sm),
+              GridView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                gridDelegate:
+                    const SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: 220,
+                  mainAxisSpacing: AppSpacing.md,
+                  crossAxisSpacing: AppSpacing.md,
+                  childAspectRatio: 0.9,
+                ),
+                itemCount: parts.length,
+                itemBuilder: (context, i) {
+                  final bp = parts[i];
+                  return BodyPartCard(
+                    bodyPart: bp,
+                    count: repo.countFor(bp.id),
+                    tint: AppColors.tints[i % AppColors.tints.length],
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => BodyPartScreen(bodyPart: bp)),
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -179,9 +182,12 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   const Icon(Icons.arrow_forward_rounded, color: Colors.white),
                   const SizedBox(width: 8),
-                  Text(
-                    '${daily.minutes} min • ${daily.stretchIds.length} stretches',
-                    style: const TextStyle(color: Colors.white),
+                  Expanded(
+                    child: Text(
+                      '${daily.minutes} min • ${daily.stretchIds.length} stretches',
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(color: Colors.white),
+                    ),
                   ),
                 ],
               ),

@@ -4,6 +4,7 @@ import '../../core/constants/app_constants.dart';
 import '../../data/content_repository.dart';
 import '../../models/body_part.dart';
 import '../../widgets/banner_ad_slot.dart';
+import '../../widgets/responsive.dart';
 import '../../widgets/stretch_tile.dart';
 import '../stretch/stretch_detail_screen.dart';
 
@@ -35,8 +36,9 @@ class _BodyPartScreenState extends State<BodyPartScreen> {
 
     return Scaffold(
       appBar: AppBar(title: Text(widget.bodyPart.name)),
-      body: Column(
-        children: [
+      body: MaxWidth(
+        child: Column(
+          children: [
           if (props.isNotEmpty) ...[
             _filterLabel(context, 'Props'),
             _chipRow([
@@ -75,6 +77,7 @@ class _BodyPartScreenState extends State<BodyPartScreen> {
           ),
           const BannerAdSlot(),
         ],
+        ),
       ),
     );
   }

@@ -5,6 +5,7 @@ import '../../core/constants/app_constants.dart';
 import '../../models/stretch.dart';
 import '../../widgets/hold_timer_ring.dart';
 import '../../widgets/prop_badge.dart';
+import '../../widgets/responsive.dart';
 import '../../widgets/visual_placeholder.dart';
 
 class StretchDetailScreen extends StatefulWidget {
@@ -60,7 +61,8 @@ class _StretchDetailScreenState extends State<StretchDetailScreen> {
           ),
         ],
       ),
-      body: ListView(
+      body: MaxWidth(
+        child: ListView(
         padding: const EdgeInsets.fromLTRB(
             AppSpacing.md, 0, AppSpacing.md, AppSpacing.xl),
         children: [
@@ -132,6 +134,7 @@ class _StretchDetailScreenState extends State<StretchDetailScreen> {
             _callout(context, Icons.health_and_safety_outlined, 'Safety',
                 s.safetyNote, scheme.tertiary),
         ],
+        ),
       ),
     );
   }

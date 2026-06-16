@@ -36,6 +36,40 @@ Checks JSON parses, required fields exist, and every routine stretchId resolves.
 - For video later: add the mp4, set the stretch's `assetType` to `video`, and extend `VisualPlaceholder`/add a video widget.
 
 ## Progress log (newest first)
+- 2026-06-15 (k) — Final QA recheck via two specialist passes (ui-designer + api-tester). UI-designer:
+  design-token audit clean — zero hardcoded hex outside the theme, spacing/radii via tokens, AA contrast
+  pinned, ≥48dp touch targets, responsive done; one fix — `PropBadge` now uses a theme text token instead
+  of hardcoded `fontSize: 11` (better all-ages legibility). API-tester: new `tools/test_app_contract.py`
+  runs 811 assertions over the JSON↔model contract (mirrors `fromJson` hard casts that would throw on
+  load), referential integrity, enum/domain validity, asset + AdMob/plist bindings, replicated repository
+  logic + edge cases, and data quality → 0 failures. One warning (no fully floor-only routine) → improved
+  `ContentRepository.dailySuggestionFor` to pick the fewest-missing-prop routine instead of falling back
+  to all, so prop-constrained users always get the most-achievable pick. Brackets balanced on edits.
+- 2026-06-15 (j) — Fixed real-device "crashes immediately on launch" (worked in emulator) + made every
+  screen responsive for phones AND tablets/iPad (Android + iOS). CRASH: `runApp` no longer waits on
+  AdMob — `MobileAds.initialize()` is now fire-and-forget + try/caught in `AdService`; banner +
+  interstitial loads guarded; `main()` wrapped in `runZonedGuarded` + `FlutterError.onError` +
+  `PlatformDispatcher.onError`; a `_Bootstrap` loads content/state behind a spinner with a "Try again"
+  screen, so a release asset/init failure can't blank-crash before the first frame. RESPONSIVE: new
+  `lib/widgets/responsive.dart` (`MaxWidth`, `isWideScreen`); list/detail content capped+centred (~700)
+  on all browse screens; Home grid → `SliverGridDelegateWithMaxCrossAxisExtent` (2 cols on phone → more
+  on tablet); `HoldTimerRing` now sizes from `LayoutBuilder` with clamps + `FittedBox` centre (no
+  overflow at large text, not tiny on tablet, stroke/digit derive from diameter); routine player +
+  completion are scrollable (`LayoutBuilder`+`SingleChildScrollView`+`IntrinsicHeight`, Spacers kept) and
+  completion stats wrapped in `Expanded`; `MainShell` shows a `NavigationRail` at width ≥720 and a
+  `NavigationBar` on phones; Today's-Pick row + routine description overflow-guarded. Verified brackets
+  balanced across `lib/`, imports present, content valid. Canva connector authorized (account has no
+  brand kit yet).
+- 2026-06-15 (i) — Store release graphics → `store-assets/` (+ `store-assets/README.md` upload guide).
+  Redesigned app icon (calm overhead-reach figure, teal gradient + aura) via `tools/generate_store_icon.py`
+  → Play 512 (RGBA), Apple 1024 (no-alpha), refreshed launcher source + adaptive foreground. Built 5
+  high-fidelity app-screen recreations (`tools/generate_app_mockups.py`) and composed marketing assets
+  (`tools/generate_store_graphics.py`): Play feature graphic 1024×500, and device-framed captioned
+  screenshots at Play 1080×1920, Apple 6.7" 1290×2796, Apple 6.9" 1320×2868 (5 each). All sizes/formats/
+  file-sizes verified against current Play + Apple specs. Fonts = DejaVu (sandbox); brand teal #2A9D8F.
+  NOTE: user chose "build in Canva" but Canva OAuth wasn't completed in-session, and Canva's API can't
+  ingest the real app screens without hosting — so these final files were composed locally (publishable
+  as-is). Canva editable feature-graphic still offered as a follow-up once connected.
 - 2026-06-15 (h) — Shipped P2 (docs/UX-REVIEW.md). Prop personalization: onboarding "What do you have
   nearby?" step + Settings → Personalize → "Home props" editor, persisted as AppState.availableProps
   (+ propsConfigured). Prop-aware "Today's Pick": ContentRepository.dailySuggestionFor() filters

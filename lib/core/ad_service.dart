@@ -1,5 +1,6 @@
 import 'dart:io' show Platform;
 
+import 'package:flutter/foundation.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import 'constants/app_constants.dart';
@@ -22,9 +23,15 @@ class AdService {
 
   Future<void> init() async {
     if (!AdConfig.enabled || _initialized) return;
-    await MobileAds.instance.initialize();
-    _initialized = true;
-    preloadInterstitial();
+    try {
+      await MobileAds.instance.initialize();
+      _initialized = true;
+      preloadInterstitial();
+    } catch (e) {
+      // Never let ads take down the app — just run without them this session.
+      _initialized = false;
+      debugPrint('AdMob init failed — running without ads: $e');
+    }
   }
 
   String get bannerUnitId =>
@@ -34,14 +41,18 @@ class AdService {
 
   void preloadInterstitial() {
     if (!AdConfig.enabled || !_initialized || _interstitial != null) return;
-    InterstitialAd.load(
-      adUnitId: interstitialUnitId,
-      request: const AdRequest(),
-      adLoadCallback: InterstitialAdLoadCallback(
-        onAdLoaded: (ad) => _interstitial = ad,
-        onAdFailedToLoad: (err) => _interstitial = null,
-      ),
-    );
+    try {
+      InterstitialAd.load(
+        adUnitId: interstitialUnitId,
+        request: const AdRequest(),
+        adLoadCallback: InterstitialAdLoadCallback(
+          onAdLoaded: (ad) => _interstitial = ad,
+          onAdFailedToLoad: (err) => _interstitial = null,
+        ),
+      );
+    } catch (e) {
+      debugPrint('Interstitial preload failed: $e');
+    }
   }
 
   /// Call AFTER a routine finishes (never during). Frequency-capped so it stays gentle.
@@ -64,7 +75,13 @@ class AdService {
           preloadInterstitial();
         },
       );
-      ad.show();
+      try {
+        ad.show();
+      } catch (e) {
+        debugPrint('Interstitial show failed: $e');
+        ad.dispose();
+        _interstitial = null;
+      }
     } else {
       preloadInterstitial();
     }

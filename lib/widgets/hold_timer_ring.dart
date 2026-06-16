@@ -6,6 +6,10 @@ import 'package:flutter/material.dart';
 /// Tap the ring (or the Pause button) to pause/resume.
 /// Calls [onComplete] when the hold finishes; [onSkip] (if given) renders a Skip button.
 ///
+/// The ring sizes itself to the available width (clamped), so it never overflows
+/// a small phone and isn't lost on a tablet. The centre label scales down to fit,
+/// so large accessibility text can't push it out of the circle.
+///
 /// Accessibility: the ring is a live region announcing the remaining time (~every 5s),
 /// and the Restart / Pause / Skip controls are labeled, focusable buttons (≥48dp).
 class HoldTimerRing extends StatefulWidget {
@@ -65,101 +69,121 @@ class _HoldTimerRingState extends State<HoldTimerRing>
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        AnimatedBuilder(
-          animation: _c,
-          builder: (context, _) {
-            final remaining = (widget.seconds * (1 - _c.value)).ceil();
-            // Announce in ~5s steps so the screen reader isn't chatty.
-            final announce =
-                remaining <= 5 ? remaining : (remaining / 5).round() * 5;
-            return Semantics(
-              container: true,
-              liveRegion: true,
-              label: 'Hold timer',
-              value: '$announce seconds remaining',
-              hint: _c.isAnimating ? 'Double tap to pause' : 'Double tap to resume',
-              onTap: _toggle,
-              child: GestureDetector(
-                onTap: _toggle,
-                child: SizedBox(
-                  width: 232,
-                  height: 232,
-                  child: CustomPaint(
-                    painter: _RingPainter(
-                      progress: _c.value,
-                      color: scheme.primary,
-                      track: scheme.primary.withValues(alpha: 0.14),
-                    ),
-                    child: Center(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            '$remaining',
-                            style: Theme.of(context)
-                                .textTheme
-                                .displaySmall
-                                ?.copyWith(
-                                    fontSize: 66, color: scheme.onSurface),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final maxW = constraints.maxWidth.isFinite ? constraints.maxWidth : 320.0;
+        final side = maxW.clamp(160.0, 280.0).toDouble();
+        final stroke = (side * 0.06).clamp(10.0, 18.0).toDouble();
+        final digitSize = side * 0.30;
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            AnimatedBuilder(
+              animation: _c,
+              builder: (context, _) {
+                final remaining = (widget.seconds * (1 - _c.value)).ceil();
+                // Announce in ~5s steps so the screen reader isn't chatty.
+                final announce =
+                    remaining <= 5 ? remaining : (remaining / 5).round() * 5;
+                return Semantics(
+                  container: true,
+                  liveRegion: true,
+                  label: 'Hold timer',
+                  value: '$announce seconds remaining',
+                  hint: _c.isAnimating
+                      ? 'Double tap to pause'
+                      : 'Double tap to resume',
+                  onTap: _toggle,
+                  child: GestureDetector(
+                    onTap: _toggle,
+                    child: SizedBox(
+                      width: side,
+                      height: side,
+                      child: CustomPaint(
+                        painter: _RingPainter(
+                          progress: _c.value,
+                          color: scheme.primary,
+                          track: scheme.primary.withValues(alpha: 0.14),
+                          strokeWidth: stroke,
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.all(stroke + side * 0.12),
+                          child: Center(
+                            child: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    '$remaining',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .displaySmall
+                                        ?.copyWith(
+                                            fontSize: digitSize,
+                                            height: 1.0,
+                                            color: scheme.onSurface),
+                                  ),
+                                  Text(
+                                    widget.centerLabel ?? 'seconds',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium
+                                        ?.copyWith(
+                                            color: scheme.onSurfaceVariant),
+                                  ),
+                                  const SizedBox(height: 6),
+                                  Icon(
+                                    _c.isAnimating
+                                        ? Icons.pause_rounded
+                                        : Icons.play_arrow_rounded,
+                                    color: scheme.primary,
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
-                          Text(
-                            widget.centerLabel ?? 'seconds',
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium
-                                ?.copyWith(color: scheme.onSurfaceVariant),
-                          ),
-                          const SizedBox(height: 6),
-                          Icon(
-                            _c.isAnimating
-                                ? Icons.pause_rounded
-                                : Icons.play_arrow_rounded,
-                            color: scheme.primary,
-                          ),
-                        ],
+                        ),
                       ),
                     ),
                   ),
+                );
+              },
+            ),
+            const SizedBox(height: 16),
+            // Labeled, focusable controls (switch-access / screen-reader friendly).
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton(
+                  tooltip: 'Restart',
+                  onPressed: _restart,
+                  icon: const Icon(Icons.replay_rounded),
                 ),
-              ),
-            );
-          },
-        ),
-        const SizedBox(height: 16),
-        // Labeled, focusable controls (switch-access / screen-reader friendly).
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            IconButton(
-              tooltip: 'Restart',
-              onPressed: _restart,
-              icon: const Icon(Icons.replay_rounded),
+                const SizedBox(width: 8),
+                AnimatedBuilder(
+                  animation: _c,
+                  builder: (context, _) => IconButton.filledTonal(
+                    tooltip: _c.isAnimating ? 'Pause' : 'Resume',
+                    onPressed: _toggle,
+                    icon: Icon(_c.isAnimating
+                        ? Icons.pause_rounded
+                        : Icons.play_arrow_rounded),
+                  ),
+                ),
+                if (widget.onSkip != null) ...[
+                  const SizedBox(width: 8),
+                  IconButton(
+                    tooltip: 'Skip',
+                    onPressed: widget.onSkip,
+                    icon: const Icon(Icons.skip_next_rounded),
+                  ),
+                ],
+              ],
             ),
-            const SizedBox(width: 8),
-            AnimatedBuilder(
-              animation: _c,
-              builder: (context, _) => IconButton.filledTonal(
-                tooltip: _c.isAnimating ? 'Pause' : 'Resume',
-                onPressed: _toggle,
-                icon: Icon(_c.isAnimating
-                    ? Icons.pause_rounded
-                    : Icons.play_arrow_rounded),
-              ),
-            ),
-            if (widget.onSkip != null) ...[
-              const SizedBox(width: 8),
-              IconButton(
-                tooltip: 'Skip',
-                onPressed: widget.onSkip,
-                icon: const Icon(Icons.skip_next_rounded),
-              ),
-            ],
           ],
-        ),
-      ],
+        );
+      },
     );
   }
 }
@@ -168,26 +192,28 @@ class _RingPainter extends CustomPainter {
   final double progress; // 0 -> 1 elapsed
   final Color color;
   final Color track;
+  final double strokeWidth;
   _RingPainter({
     required this.progress,
     required this.color,
     required this.track,
+    required this.strokeWidth,
   });
 
   @override
   void paint(Canvas canvas, Size size) {
     final center = size.center(Offset.zero);
-    final radius = size.width / 2 - 12;
+    final radius = size.width / 2 - strokeWidth * 0.8;
 
     final trackPaint = Paint()
       ..color = track
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 14
+      ..strokeWidth = strokeWidth
       ..strokeCap = StrokeCap.round;
     final progPaint = Paint()
       ..color = color
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 14
+      ..strokeWidth = strokeWidth
       ..strokeCap = StrokeCap.round;
 
     canvas.drawCircle(center, radius, trackPaint);
@@ -203,5 +229,7 @@ class _RingPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant _RingPainter old) =>
-      old.progress != progress || old.color != color;
+      old.progress != progress ||
+      old.color != color ||
+      old.strokeWidth != strokeWidth;
 }

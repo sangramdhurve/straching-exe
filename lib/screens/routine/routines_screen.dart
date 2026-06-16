@@ -4,6 +4,7 @@ import '../../core/constants/app_constants.dart';
 import '../../data/content_repository.dart';
 import '../../models/routine.dart';
 import '../../widgets/banner_ad_slot.dart';
+import '../../widgets/responsive.dart';
 import 'routine_detail_screen.dart';
 
 /// Browse all guided routines.
@@ -15,17 +16,19 @@ class RoutinesScreen extends StatelessWidget {
     final routines = ContentRepository.instance.routines;
     return Scaffold(
       appBar: AppBar(title: const Text('Routines')),
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsets.all(AppSpacing.md),
-              itemCount: routines.length,
-              itemBuilder: (context, i) => _RoutineCard(routine: routines[i]),
+      body: MaxWidth(
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView.builder(
+                padding: const EdgeInsets.all(AppSpacing.md),
+                itemCount: routines.length,
+                itemBuilder: (context, i) => _RoutineCard(routine: routines[i]),
+              ),
             ),
-          ),
-          const BannerAdSlot(),
-        ],
+            const BannerAdSlot(),
+          ],
+        ),
       ),
     );
   }
@@ -69,6 +72,8 @@ class _RoutineCard extends StatelessWidget {
                         style: Theme.of(context).textTheme.titleMedium),
                     const SizedBox(height: 2),
                     Text(routine.description,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
                             color: scheme.onSurfaceVariant)),
                     const SizedBox(height: 6),

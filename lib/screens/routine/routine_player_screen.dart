@@ -18,6 +18,10 @@ class _Segment {
 /// Full-screen guided player that auto-advances through a routine,
 /// with a short rest between segments. NO ads ever appear here — the only
 /// (optional, frequency-capped) ad fires after the completion screen renders.
+///
+/// The active view scrolls if it can't fit (short screens, landscape, or large
+/// accessibility text) instead of overflowing, and content is width-capped so
+/// it stays centred and readable on tablets/iPad.
 class RoutinePlayerScreen extends StatefulWidget {
   final Routine routine;
   const RoutinePlayerScreen({super.key, required this.routine});
@@ -115,99 +119,121 @@ class _RoutinePlayerScreenState extends State<RoutinePlayerScreen> {
       },
       child: Scaffold(
         body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(AppSpacing.lg),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    IconButton(
-                      tooltip: 'Exit routine',
-                      icon: const Icon(Icons.close),
-                      onPressed: _handleExit,
-                    ),
-                    Expanded(
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: LinearProgressIndicator(
-                          value: progress,
-                          minHeight: 8,
-                          backgroundColor: scheme.surfaceContainerHighest,
-                          semanticsLabel: 'Routine progress',
-                          semanticsValue: '${_i + 1} of ${_segments.length}',
+          child: Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 560),
+              child: Padding(
+                padding: const EdgeInsets.all(AppSpacing.lg),
+                child: LayoutBuilder(
+                  builder: (context, c) => SingleChildScrollView(
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(minHeight: c.maxHeight),
+                      child: IntrinsicHeight(
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                IconButton(
+                                  tooltip: 'Exit routine',
+                                  icon: const Icon(Icons.close),
+                                  onPressed: _handleExit,
+                                ),
+                                Expanded(
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(8),
+                                    child: LinearProgressIndicator(
+                                      value: progress,
+                                      minHeight: 8,
+                                      backgroundColor:
+                                          scheme.surfaceContainerHighest,
+                                      semanticsLabel: 'Routine progress',
+                                      semanticsValue:
+                                          '${_i + 1} of ${_segments.length}',
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(width: 12),
+                                Text('${_i + 1}/${_segments.length}'),
+                              ],
+                            ),
+                            const Spacer(),
+                            if (!_resting) ...[
+                              Text(s.name,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineSmall,
+                                  textAlign: TextAlign.center),
+                              const SizedBox(height: 4),
+                              Text(seg.label,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleMedium
+                                      ?.copyWith(color: scheme.primary)),
+                              const SizedBox(height: AppSpacing.lg),
+                              ConstrainedBox(
+                                constraints: const BoxConstraints(
+                                    maxWidth: 200, maxHeight: 200),
+                                child: AspectRatio(
+                                  aspectRatio: 1,
+                                  child: VisualPlaceholder(stretch: s),
+                                ),
+                              ),
+                              const SizedBox(height: AppSpacing.lg),
+                              HoldTimerRing(
+                                key: ValueKey('seg_$_i'),
+                                seconds: s.holdSeconds,
+                                centerLabel: seg.label,
+                                onComplete: _onSegmentDone,
+                                onSkip: _onSegmentDone,
+                              ),
+                              const SizedBox(height: AppSpacing.md),
+                              Text(s.breathingCue,
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium
+                                      ?.copyWith(
+                                          color: scheme.onSurfaceVariant)),
+                            ] else ...[
+                              Text('Rest',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineSmall),
+                              const SizedBox(height: 4),
+                              Text('Next: ${_segments[_i + 1].stretch.name}',
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleMedium
+                                      ?.copyWith(
+                                          color: scheme.onSurfaceVariant)),
+                              const SizedBox(height: AppSpacing.md),
+                              ConstrainedBox(
+                                constraints: const BoxConstraints(
+                                    maxWidth: 130, maxHeight: 130),
+                                child: AspectRatio(
+                                  aspectRatio: 1,
+                                  child: VisualPlaceholder(
+                                      stretch: _segments[_i + 1].stretch),
+                                ),
+                              ),
+                              const SizedBox(height: AppSpacing.lg),
+                              HoldTimerRing(
+                                key: ValueKey('rest_$_i'),
+                                seconds: AppDurations.restBetweenSeconds,
+                                centerLabel: 'Rest',
+                                onComplete: _onRestDone,
+                                onSkip: _onRestDone,
+                              ),
+                            ],
+                            const Spacer(),
+                          ],
                         ),
                       ),
                     ),
-                    const SizedBox(width: 12),
-                    Text('${_i + 1}/${_segments.length}'),
-                  ],
+                  ),
                 ),
-                const Spacer(),
-                if (!_resting) ...[
-                  Text(s.name,
-                      style: Theme.of(context).textTheme.headlineSmall,
-                      textAlign: TextAlign.center),
-                  const SizedBox(height: 4),
-                  Text(seg.label,
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleMedium
-                          ?.copyWith(color: scheme.primary)),
-                  const SizedBox(height: AppSpacing.lg),
-                  ConstrainedBox(
-                    constraints:
-                        const BoxConstraints(maxWidth: 200, maxHeight: 200),
-                    child: AspectRatio(
-                      aspectRatio: 1,
-                      child: VisualPlaceholder(stretch: s),
-                    ),
-                  ),
-                  const SizedBox(height: AppSpacing.lg),
-                  HoldTimerRing(
-                    key: ValueKey('seg_$_i'),
-                    seconds: s.holdSeconds,
-                    centerLabel: seg.label,
-                    onComplete: _onSegmentDone,
-                    onSkip: _onSegmentDone,
-                  ),
-                  const SizedBox(height: AppSpacing.md),
-                  Text(s.breathingCue,
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyMedium
-                          ?.copyWith(color: scheme.onSurfaceVariant)),
-                ] else ...[
-                  Text('Rest',
-                      style: Theme.of(context).textTheme.headlineSmall),
-                  const SizedBox(height: 4),
-                  Text('Next: ${_segments[_i + 1].stretch.name}',
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleMedium
-                          ?.copyWith(color: scheme.onSurfaceVariant)),
-                  const SizedBox(height: AppSpacing.md),
-                  ConstrainedBox(
-                    constraints:
-                        const BoxConstraints(maxWidth: 130, maxHeight: 130),
-                    child: AspectRatio(
-                      aspectRatio: 1,
-                      child: VisualPlaceholder(
-                          stretch: _segments[_i + 1].stretch),
-                    ),
-                  ),
-                  const SizedBox(height: AppSpacing.lg),
-                  HoldTimerRing(
-                    key: ValueKey('rest_$_i'),
-                    seconds: AppDurations.restBetweenSeconds,
-                    centerLabel: 'Rest',
-                    onComplete: _onRestDone,
-                    onSkip: _onRestDone,
-                  ),
-                ],
-                const Spacer(),
-              ],
+              ),
             ),
           ),
         ),
@@ -225,6 +251,7 @@ class _RoutinePlayerScreenState extends State<RoutinePlayerScreen> {
                 .headlineSmall
                 ?.copyWith(color: scheme.primary)),
         Text(label,
+            textAlign: TextAlign.center,
             style: Theme.of(c)
                 .textTheme
                 .bodySmall
@@ -282,50 +309,66 @@ class _RoutinePlayerScreenState extends State<RoutinePlayerScreen> {
     final scheme = Theme.of(context).colorScheme;
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(AppSpacing.lg),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Center(child: _bloomCheck(context)),
-              const SizedBox(height: AppSpacing.md),
-              Text('Nicely done!',
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.headlineMedium),
-              const SizedBox(height: AppSpacing.sm),
-              Text(
-                'You finished "${widget.routine.name}". Your body thanks you.',
-                textAlign: TextAlign.center,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyLarge
-                    ?.copyWith(color: scheme.onSurfaceVariant),
-              ),
-              const SizedBox(height: AppSpacing.xl),
-              ListenableBuilder(
-                listenable: AppState.instance,
-                builder: (context, _) => Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        child: Center(
+          child: SingleChildScrollView(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 520),
+              child: Padding(
+                padding: const EdgeInsets.all(AppSpacing.lg),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    _stat(context, '${widget.routine.stretchIds.length}',
-                        'stretches'),
-                    _stat(context, '${widget.routine.minutes}', 'minutes'),
-                    _stat(
-                        context,
-                        '${AppState.instance.streak}',
-                        AppState.instance.streak == 1
-                            ? 'day — nice start!'
-                            : 'day streak'),
+                    Center(child: _bloomCheck(context)),
+                    const SizedBox(height: AppSpacing.md),
+                    Text('Nicely done!',
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.headlineMedium),
+                    const SizedBox(height: AppSpacing.sm),
+                    Text(
+                      'You finished "${widget.routine.name}". Your body thanks you.',
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyLarge
+                          ?.copyWith(color: scheme.onSurfaceVariant),
+                    ),
+                    const SizedBox(height: AppSpacing.xl),
+                    ListenableBuilder(
+                      listenable: AppState.instance,
+                      builder: (context, _) => Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Expanded(
+                            child: _stat(context,
+                                '${widget.routine.stretchIds.length}',
+                                'stretches'),
+                          ),
+                          Expanded(
+                            child: _stat(
+                                context, '${widget.routine.minutes}', 'minutes'),
+                          ),
+                          Expanded(
+                            child: _stat(
+                              context,
+                              '${AppState.instance.streak}',
+                              AppState.instance.streak == 1
+                                  ? 'day — nice start!'
+                                  : 'day streak',
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: AppSpacing.xl),
+                    FilledButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: const Text('Done'),
+                    ),
                   ],
                 ),
               ),
-              const SizedBox(height: AppSpacing.xl),
-              FilledButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text('Done'),
-              ),
-            ],
+            ),
           ),
         ),
       ),
