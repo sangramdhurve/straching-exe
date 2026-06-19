@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import '../../core/app_state.dart';
 import '../../core/constants/app_constants.dart';
 import '../../models/stretch.dart';
+import '../../widgets/demo_player.dart';
 import '../../widgets/hold_timer_ring.dart';
 import '../../widgets/prop_badge.dart';
 import '../../widgets/responsive.dart';
-import '../../widgets/visual_placeholder.dart';
 
 class StretchDetailScreen extends StatefulWidget {
   final Stretch stretch;
@@ -19,6 +19,8 @@ class StretchDetailScreen extends StatefulWidget {
 class _StretchDetailScreenState extends State<StretchDetailScreen> {
   late String _level;
   bool _timerVisible = false;
+  // Demo loops as a preview before the hold starts, then follows the timer.
+  bool _demoPlaying = true;
 
   @override
   void initState() {
@@ -37,6 +39,16 @@ class _StretchDetailScreenState extends State<StretchDetailScreen> {
       : _level == 'deeper'
           ? 'Deeper variation'
           : 'Standard';
+
+  /// A short, glanceable form cue shown on the demo — the first clause of the
+  /// first step, so the user reads "what to do" without parsing a paragraph.
+  String? get _formCue {
+    if (widget.stretch.steps.isEmpty) return null;
+    final clause =
+        widget.stretch.steps.first.split(RegExp(r'[,.;]')).first.trim();
+    if (clause.isEmpty) return null;
+    return clause.length <= 32 ? clause : '${clause.substring(0, 30).trim()}…';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,16 +78,17 @@ class _StretchDetailScreenState extends State<StretchDetailScreen> {
         padding: const EdgeInsets.fromLTRB(
             AppSpacing.md, 0, AppSpacing.md, AppSpacing.xl),
         children: [
-          Center(
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 320, maxHeight: 320),
-              child: AspectRatio(
-                aspectRatio: 1,
-                child: VisualPlaceholder(stretch: s),
-              ),
-            ),
-          ),
+          // Intensity chooser, above the hero — set how far you go before you start.
+          Text('Choose your intensity — go only as far as is comfortable',
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyMedium
+                  ?.copyWith(color: scheme.onSurfaceVariant)),
+          const SizedBox(height: AppSpacing.sm),
+          _levelToggle(context),
           const SizedBox(height: AppSpacing.md),
+
+          // Quick facts.
           Wrap(
             spacing: 8,
             runSpacing: 8,
@@ -89,9 +102,46 @@ class _StretchDetailScreenState extends State<StretchDetailScreen> {
                     s.targetMuscles.join(', ')),
             ],
           ),
-          const SizedBox(height: AppSpacing.lg),
+          const SizedBox(height: AppSpacing.md),
 
-          // Hold timer (hero)
+          // HERO: watch-and-copy demo with a glanceable form cue, the hold timer
+          // right under it, and the breathing cue under that — so a user mid-hold
+          // sees the body, the count, and the breath without scrolling.
+          Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 380, maxHeight: 380),
+              child: AspectRatio(
+                aspectRatio: 1,
+                child: Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    DecoratedBox(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(
+                            color: scheme.shadow.withValues(alpha: 0.12),
+                            blurRadius: 18,
+                            offset: const Offset(0, 6),
+                          ),
+                        ],
+                      ),
+                      child: DemoPlayer(stretch: s, playing: _demoPlaying),
+                    ),
+                    if (_formCue != null)
+                      Positioned(
+                        left: AppSpacing.sm,
+                        right: AppSpacing.sm,
+                        bottom: AppSpacing.sm,
+                        child: _formCuePill(context, _formCue!),
+                      ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: AppSpacing.md),
+
           Center(
             child: _timerVisible
                 ? HoldTimerRing(
@@ -100,16 +150,25 @@ class _StretchDetailScreenState extends State<StretchDetailScreen> {
                     centerLabel: s.sides == 2 ? 'each side' : 'hold',
                     onComplete: () =>
                         AppState.instance.registerSessionComplete(),
+                    onRunningChanged: (running) =>
+                        setState(() => _demoPlaying = running),
                   )
-                : FilledButton.icon(
-                    onPressed: () => setState(() => _timerVisible = true),
-                    icon: const Icon(Icons.play_arrow),
-                    label: Text('Start ${s.holdSeconds}s hold'),
+                : SizedBox(
+                    width: double.infinity,
+                    child: FilledButton.icon(
+                      style: FilledButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: AppSpacing.md),
+                      ),
+                      onPressed: () => setState(() => _timerVisible = true),
+                      icon: const Icon(Icons.play_arrow),
+                      label: Text('Start ${s.holdSeconds}s hold'),
+                    ),
                   ),
           ),
-          const SizedBox(height: AppSpacing.lg),
+          const SizedBox(height: AppSpacing.md),
 
-          _levelToggle(context),
+          if (s.breathingCue.isNotEmpty) _breathingBanner(context, s.breathingCue),
           const SizedBox(height: AppSpacing.lg),
 
           _section(context, 'How to do it'),
@@ -117,8 +176,6 @@ class _StretchDetailScreenState extends State<StretchDetailScreen> {
             _step(context, i + 1, s.steps[i]),
           const SizedBox(height: AppSpacing.md),
 
-          _callout(context, Icons.air, 'Breathing', s.breathingCue,
-              scheme.primary),
           if (_levelTip != null)
             _callout(context, Icons.tune, _levelLabel, _levelTip!,
                 scheme.secondary),
@@ -165,6 +222,59 @@ class _StretchDetailScreenState extends State<StretchDetailScreen> {
           Icon(icon, size: 14, color: scheme.onSurfaceVariant),
           const SizedBox(width: 5),
           Text(text, style: Theme.of(c).textTheme.bodySmall),
+        ],
+      ),
+    );
+  }
+
+  /// Caption pill overlaid on the demo: a readable scrim so it stays legible
+  /// over any frame, sized for older eyes.
+  Widget _formCuePill(BuildContext c, String text) {
+    final scheme = Theme.of(c).colorScheme;
+    return Container(
+      padding:
+          const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: 8),
+      decoration: BoxDecoration(
+        color: scheme.surface.withValues(alpha: 0.88),
+        borderRadius: BorderRadius.circular(AppRadii.chip),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(Icons.accessibility_new_rounded,
+              size: 16, color: scheme.primary),
+          const SizedBox(width: 6),
+          Flexible(
+            child: Text(text,
+                textAlign: TextAlign.center,
+                style: Theme.of(c)
+                    .textTheme
+                    .titleSmall
+                    ?.copyWith(color: scheme.onSurface)),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// The breathing cue, sitting directly under the timer in the brand colour so
+  /// it's the clear secondary guidance during a hold. Announced to screen readers.
+  Widget _breathingBanner(BuildContext c, String cue) {
+    final scheme = Theme.of(c).colorScheme;
+    return Semantics(
+      liveRegion: true,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(Icons.air, size: 20, color: scheme.primary),
+          const SizedBox(width: AppSpacing.sm),
+          Flexible(
+            child: Text(cue,
+                textAlign: TextAlign.center,
+                style: Theme.of(c).textTheme.titleMedium?.copyWith(
+                    color: scheme.primary, fontWeight: FontWeight.w600)),
+          ),
         ],
       ),
     );

@@ -152,8 +152,8 @@
         "gentle": "Support the arm with less pressure.",
         "deeper": "Draw the arm slightly closer to your chest."
       },
-      "assetType": "illustration",
-      "assetFile": "assets/visuals/cross_body_shoulder.gif",
+      "assetType": "video",
+      "assetFile": "assets/visuals/cross_body_shoulder.mp4",
       "tags": [
         "desk",
         "upper_body",

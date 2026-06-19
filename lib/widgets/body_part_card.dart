@@ -47,11 +47,10 @@ class BodyPartCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: AppSpacing.md),
+              // No maxLines clamp: long names must wrap, not clip, at large text.
               Text(
                 bodyPart.name,
                 style: Theme.of(context).textTheme.titleMedium,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
               ),
               const SizedBox(height: 2),
               Text(

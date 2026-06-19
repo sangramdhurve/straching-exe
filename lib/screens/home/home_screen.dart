@@ -52,9 +52,16 @@ class HomeScreen extends StatelessWidget {
                                     .textTheme
                                     .bodyMedium
                                     ?.copyWith(color: scheme.onSurfaceVariant)),
-                            Text('Time to stretch',
+                            Text('Let\'s loosen up',
                                 style:
                                     Theme.of(context).textTheme.headlineSmall),
+                            const SizedBox(height: 2),
+                            Text(
+                                'Gentle stretches for every body — go at your own pace',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium
+                                    ?.copyWith(color: scheme.onSurfaceVariant)),
                           ],
                         ),
                       ),
@@ -74,12 +81,16 @@ class HomeScreen extends StatelessWidget {
               GridView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                gridDelegate:
-                    const SliverGridDelegateWithMaxCrossAxisExtent(
+                // Fixed-height tiles that GROW with the text scale, so long
+                // section names wrap without clipping in large-text mode.
+                gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                   maxCrossAxisExtent: 220,
                   mainAxisSpacing: AppSpacing.md,
                   crossAxisSpacing: AppSpacing.md,
-                  childAspectRatio: 0.9,
+                  mainAxisExtent: 168 +
+                      90 *
+                          (MediaQuery.textScalerOf(context).scale(1) - 1)
+                              .clamp(0.0, 1.5),
                 ),
                 itemCount: parts.length,
                 itemBuilder: (context, i) {

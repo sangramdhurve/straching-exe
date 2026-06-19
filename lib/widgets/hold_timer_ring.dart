@@ -19,6 +19,10 @@ class HoldTimerRing extends StatefulWidget {
   final String? centerLabel;
   final bool autoStart;
 
+  /// Fires with `true` when the countdown is running and `false` when it pauses
+  /// or completes. Lets a synced demo clip play/pause in time with the hold.
+  final ValueChanged<bool>? onRunningChanged;
+
   const HoldTimerRing({
     super.key,
     required this.seconds,
@@ -26,6 +30,7 @@ class HoldTimerRing extends StatefulWidget {
     this.onSkip,
     this.centerLabel,
     this.autoStart = true,
+    this.onRunningChanged,
   });
 
   @override
@@ -44,8 +49,20 @@ class _HoldTimerRingState extends State<HoldTimerRing>
       duration: Duration(seconds: widget.seconds),
     )..addStatusListener((s) {
         if (s == AnimationStatus.completed) widget.onComplete?.call();
+        _notifyRunning();
       });
-    if (widget.autoStart) _c.forward();
+    if (widget.autoStart) {
+      _c.forward();
+      // Report initial running state after the first frame (callback may setState).
+      WidgetsBinding.instance.addPostFrameCallback((_) => _notifyRunning());
+    }
+  }
+
+  /// Tell the parent whether the countdown is currently running, so a synced
+  /// demo clip can play/pause with it. `stop()` doesn't emit a status change,
+  /// so we also call this explicitly from the pause/restart handlers.
+  void _notifyRunning() {
+    if (mounted) widget.onRunningChanged?.call(_c.isAnimating);
   }
 
   @override
@@ -62,9 +79,13 @@ class _HoldTimerRingState extends State<HoldTimerRing>
         _c.isCompleted ? _c.forward(from: 0) : _c.forward();
       }
     });
+    _notifyRunning();
   }
 
-  void _restart() => setState(() => _c.forward(from: 0));
+  void _restart() {
+    setState(() => _c.forward(from: 0));
+    _notifyRunning();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -166,6 +187,11 @@ class _HoldTimerRingState extends State<HoldTimerRing>
                   builder: (context, _) => IconButton.filledTonal(
                     tooltip: _c.isAnimating ? 'Pause' : 'Resume',
                     onPressed: _toggle,
+                    iconSize: 30,
+                    // Primary control gets a larger 56dp target (design system §8.2).
+                    style: IconButton.styleFrom(
+                      minimumSize: const Size(56, 56),
+                    ),
                     icon: Icon(_c.isAnimating
                         ? Icons.pause_rounded
                         : Icons.play_arrow_rounded),

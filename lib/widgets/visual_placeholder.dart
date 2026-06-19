@@ -18,7 +18,6 @@ class VisualPlaceholder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bp = BodyPart.byId(stretch.bodyPartId);
     final tint =
         AppColors.tints[stretch.id.hashCode.abs() % AppColors.tints.length];
 
@@ -40,28 +39,40 @@ class VisualPlaceholder extends StatelessWidget {
             width: double.infinity,
             height: double.infinity,
             fit: BoxFit.cover,
-            errorBuilder: (context, error, stack) => Container(
-              color: tint,
-              alignment: Alignment.center,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(bp?.icon ?? Icons.self_improvement,
-                      size: 56, color: AppColors.primaryDark),
-                  const SizedBox(height: 8),
-                  Text(
-                    'Visual coming soon',
-                    style: TextStyle(
-                      color: AppColors.primaryDark.withValues(alpha: 0.8),
-                      fontSize: 12,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            errorBuilder: (context, error, stack) =>
+                visualFallback(stretch, tint),
           ),
         );
       },
     );
   }
+}
+
+/// The friendly tinted "Visual coming soon" placeholder shown when a stretch
+/// has no usable media (or an asset fails to load). Shared by [VisualPlaceholder]
+/// and DemoPlayer so both degrade identically. Pass an optional [tint]; when
+/// omitted, a stable per-stretch tint is chosen.
+Widget visualFallback(Stretch stretch, [Color? tint]) {
+  final bp = BodyPart.byId(stretch.bodyPartId);
+  final fill = tint ??
+      AppColors.tints[stretch.id.hashCode.abs() % AppColors.tints.length];
+  return Container(
+    color: fill,
+    alignment: Alignment.center,
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(bp?.icon ?? Icons.self_improvement,
+            size: 56, color: AppColors.primaryDark),
+        const SizedBox(height: 8),
+        Text(
+          'Visual coming soon',
+          style: TextStyle(
+            color: AppColors.primaryDark.withValues(alpha: 0.8),
+            fontSize: 12,
+          ),
+        ),
+      ],
+    ),
+  );
 }

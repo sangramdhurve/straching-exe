@@ -16,8 +16,11 @@ dependencies:
   # pub auto-picks the newest your Flutter supports (up to 9.x). Test IDs only for now.
   google_mobile_ads: '>=7.0.0 <10.0.0'
   url_launcher: ^6.3.0           # open the hosted privacy policy from Settings
+  # Looping human demo clips (assetType "video" -> assets/visuals/<id>.mp4),
+  # played in sync with the hold timer. Reduce-motion falls back to the poster PNG.
+  video_player: ^2.9.2
   # Added later, when needed:
-  #   lottie / video_player  -> when you add animated or mp4 visuals
+  #   lottie  -> when you add vector/Lottie visuals
 
 dev_dependencies:
   flutter_test:

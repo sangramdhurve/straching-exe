@@ -116,7 +116,19 @@ google_fonts downloads fonts on first run (needs internet once); bundle them lat
   "Today's Pick" + onboarding "Home props" step + Settings editor (`AppState.availableProps`),
   completion "bloom", and 9 custom body-map body-part icons (`tools/generate_bodypart_icons.py` →
   `assets/icons/bodyparts/`, wired in `BodyPartCard`).
-- NEXT: user runs app on Mac (Phase 1) + `dart run flutter_launcher_icons`; replace illustrations with
-  photos/MP4s (ONE character language for all 45 still pending more Mixamo anims); wire AdMob (after base
-  app confirmed); host privacy policy; device testing; store submit. Optional P2 leftovers: app-icon
-  redesign, "Quick Relief" tap-the-pain micro-routine.
+- DONE (video-demo pipeline + all-ages UI, this round): `video_player` dep; new
+  `lib/widgets/demo_player.dart` plays a looping human demo MP4 **in sync with the hold timer**
+  (`HoldTimerRing.onRunningChanged`), with poster/reduce-motion + tinted error fallbacks (shared
+  `visualFallback()` in `visual_placeholder.dart`). Wired into stretch-detail + routine-player.
+  A `video` stretch needs `assets/visuals/<id>.mp4` + `<id>.png` poster and `assetType:"video"`.
+  `cross_body_shoulder` is the first live video demo (smoke test, reuses the Blender arm-loop clip).
+  All-ages UI pass (P0s in `docs/UX-REVIEW.md`): demo-hero stretch-detail (intensity chooser on top,
+  form-cue pill on the demo, breathing banner under the timer), 56dp pause control, dominant routine-
+  player demo, text-scaling body-part grid (no clip at 1.3×), warmer home greeting + trust line.
+  Research: `docs/MARKET-RESEARCH.md`. Media recipe: `tools/encode_demo.sh` + `tools/generate_demos.md`.
+- NEXT: **generate the human demo media** — install `ffmpeg` (`brew install ffmpeg`), then follow
+  `tools/generate_demos.md` to make AI human looping clips for the 5 showcase stretches
+  (`neck_side_stretch`, `chair_hamstring`, `standing_forward_fold`, `wall_calf`, `triceps_overhead`),
+  approve the look, then scale to all 45 (Blender Mixamo render is the proven fallback). Also: user
+  runs app on Mac + `dart run flutter_launcher_icons`; wire AdMob; host privacy policy; device test;
+  store submit. Optional: "Quick Relief" tap-the-pain micro-routine.

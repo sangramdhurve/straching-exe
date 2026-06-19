@@ -95,3 +95,143 @@ The bones are strong — clean architecture, a real design system, a thoughtful 
 unbuilt details (timer controls, exit confirm, reduce-motion, completion feedback) and making one
 **decisive visual choice** so all 45 stretches look like one app. Most P0 items are quick code changes
 we can do immediately.
+
+---
+
+## All-Ages Legibility & Trust Pass (Demo-Hero Redesign)
+
+*Senior UI/UX + UX-research critique, June 2026. Context: a new `DemoPlayer` widget now plays a
+looping human video demo on the Stretch Detail and Routine Player screens, synced to the hold timer
+(`onRunningChanged` pauses the clip when the timer pauses). The strategic goal — backed by
+`docs/MARKET-RESEARCH.md` — is to make that demo the unmistakable **hero**, answer the recurring
+"am I doing it right?" worry inline, and tune every screen for the under-served 50+ / all-ages
+audience the premium athletic apps ignore. All recommendations reuse existing tokens
+(`AppSpacing`, `AppRadii`, `AppColors`, `theme.colorScheme`) — no hardcoded hex — and preserve the
+large-text 1.3×, reduce-motion, 48dp-target, and WCAG-AA guarantees already in place.*
+
+### Why this pass exists (research → design)
+The market split is clean: premium apps (StretchIt, Pliability) win trust with **real-human video +
+narrated breathing/form cues**; the free tier (Bend, Leap) ships **illustration only** and eats the
+"illustrations disrupt the flow / I can't tell if I'm doing it right" complaint. StretchHome's
+`DemoPlayer` is the wedge that closes that gap cheaply — *but only if the demo is visually dominant
+and captioned with a form cue.* Today it isn't: on the detail screen the demo is a 320px square that
+shares equal billing with a pile of info pills, and the actual hold timer + breathing cue live far
+below it, so during the hold the user is watching a small looping clip with the "am I doing it
+right?" answer scrolled off-screen. The 50+ segment also needs bigger type, bigger targets, and
+gentle-first framing — none of which the current screens lean into.
+
+### Findings by screen
+
+**Stretch Detail (`stretch_detail_screen.dart`) — the demo is not yet the hero.**
+- The layout order is demo → info pills (`Wrap`) → "Start hold" button / timer → level toggle →
+  steps → breathing callout. The breathing cue (the single most useful "am I doing it right?" signal
+  during a hold) is a callout *below the steps* — invisible while holding. The level toggle sits
+  *under* the timer, so users discover gentle/standard/deeper only after starting.
+- The demo and the timer are two separate, vertically distant elements. During the hold the eye has
+  to ping-pong between a small clip (top) and a ring (mid-screen). They should read as **one hero
+  block**: demo on top, timer + live breathing cue immediately under it, nothing else between.
+- `_infoPill` and the breathing/level callouts use `bodySmall`/`bodyMedium` with
+  `onSurfaceVariant` — fine for AA but small for older eyes when they carry the *primary* form
+  information.
+- There is **no form-cue caption on the demo**. The schema has no `formCue` field, but
+  `breathingCue` + the first `commonMistakes` entry are perfect raw material for a 3–5 word overlay
+  ("Keep your back flat", "Ease in on the exhale").
+
+**Routine Player (`routine_player_screen.dart`) — closer, but demo is the smallest element.**
+- The active layout is name → side label → demo (200px) → timer ring → breathing cue. Good that the
+  breathing cue is already under the ring. But the demo is capped at 200px and sits *above* a
+  full-size ring, so the **timer**, not the demo, is the largest thing on screen — backwards for a
+  watch-don't-read player. The hero clip should be the dominant block, the ring its companion.
+- Progress is a thin `LinearProgressIndicator` + "2/7". For all-ages glanceability this is fine, but
+  the breathing cue could be promoted (size/weight) since it's the live coaching line.
+- Rest screen shows the *next* stretch as a static `VisualPlaceholder` — good, keep it.
+
+**Home (`home_screen.dart`) — clear but cool; under-uses warmth & gentle framing.**
+- Greeting is `bodyMedium` + `headlineSmall` "Time to stretch" — competent but generic. No name, no
+  gentle-first reassurance, no "all ages / go at your own pace" trust signal that the research says
+  converts the 50+ buyer.
+- Body-part grid uses `childAspectRatio: 0.9` with `titleMedium` names clipped at `maxLines: 2 +
+  ellipsis`. At 1.3× the longer names ("Shoulders & Upper Back", "Quads & Hip Flexors") risk
+  clipping — the design system explicitly forbids ellipsis on names. (Flagged before; still live in
+  `body_part_card.dart`.)
+- "Today's Pick" card is teal-on-white with white70 sub-text — verify the `white70` description and
+  the `white` meta row clear AA on `scheme.primary`; `white70` on teal is borderline.
+
+**Hold Timer Ring (`hold_timer_ring.dart`) — solid; minor all-ages tuning.**
+- Controls are labeled 48dp `IconButton`s — good. The design system asks for a **56dp** primary
+  pause/resume; it's currently a default-size `IconButton.filledTonal`. Bump the primary control.
+- The center label (`centerLabel`) is `bodyMedium` on `onSurfaceVariant` — readable, but the "hold /
+  each side" context could be slightly larger for seniors.
+
+### Prioritized punch-list
+
+#### P0 — do now (make the demo the hero + form-confidence + all-ages legibility)
+1. **Stretch Detail: fuse demo + timer + breathing into one hero block, demo on top.**
+   Reorder so the demo (enlarge the `maxWidth`/`maxHeight` from 320 toward the available width, it's
+   the focal point), then *immediately* the hold timer, then the **live breathing cue** directly
+   under the ring (move it up from below the steps). Push info pills (duration, props, muscles) and
+   the level toggle *above* the demo or into a compact row, and the steps/mistakes/safety *below*
+   the hero. Goal: while holding, the user sees demo + ring + breathing with zero scrolling.
+   *Why: watch-don't-read; answers "am I doing it right?" at the exact moment of use.*
+2. **Add an inline form-cue caption overlaid on / directly under the demo.**
+   Show a 3–5 word cue sourced from `breathingCue` (or the first `commonMistakes` item rephrased
+   positively) in a pill at the bottom of the `DemoPlayer` box — `labelMedium`/`titleSmall`,
+   `scheme.onSurface` on a `scheme.surface` scrim at ~85% alpha, `AppRadii.chip`. Honor reduce-motion
+   (static, no fade). *Why: this is the highest-leverage trust upgrade per the research — it closes
+   the form-feedback gap an illustration-only competitor can't.*
+3. **Surface the breathing cue prominently during the hold (both screens).**
+   On Detail and in the Routine Player, render the breathing cue right under the ring at
+   `titleMedium`/`bodyLarge` weight in `scheme.primary` (not buried `bodyMedium`/`onSurfaceVariant`),
+   with `Semantics(liveRegion: true)`. *Why: breathing guidance is the calm, trust-building coaching
+   line; it must be legible mid-stretch for all ages.*
+4. **Routine Player: make the demo the dominant block, not the ring.**
+   Raise the demo's `maxWidth/maxHeight` (200 → larger, scaled to available height) and let the ring
+   be the secondary companion. *Why: a watch-don't-read player should lead with the body, not the
+   clock.*
+5. **Clarify gentle/standard/deeper and move it above the hero on Detail.**
+   Add a short label above the `SegmentedButton` ("Choose your intensity — go only as far as is
+   comfortable") and place the toggle *before* the demo/timer so users pick intensity first. Keep the
+   selected segment `scheme.primary`. *Why: form-confidence + gentle-first framing for seniors;
+   "never implies the user is doing it wrong" (design principle 1.3).*
+6. **Bigger tap target on the primary timer control.**
+   Make the pause/resume `IconButton.filledTonal` 56dp (per design system §8.2) while Restart/Skip
+   stay 48dp. *Why: the most-used control in the most critical moment, for motor/older users.*
+7. **Body-part card: remove `maxLines: 2 + ellipsis` clip; let cards grow.**
+   In `body_part_card.dart`, drop the ellipsis on `bodyPart.name` and let the card reflow at 1.3×+.
+   *Why: design system forbids clipping names; this is the exact senior audience. (Still unfixed.)*
+8. **Home: warm, gentle-first greeting + trust line.**
+   Replace "Time to stretch" with a warmer, all-ages line and add a quiet sub-line such as
+   "Gentle stretches for every body — go at your own pace" in `bodyMedium`/`onSurfaceVariant`.
+   *Why: research says gentle, no-pressure framing is the conversion lever for the 50+ segment.*
+
+#### P1 — soon
+9. Detail: give the demo a real form-cue *pill row* that can rotate 1–2 cues (breathing + one
+   positive form cue) on a slow cross-fade synced to nothing (or to phases later); reduce-motion =
+   first cue only.
+10. Routine Player: promote the side label + a thumbnail of the current demo into a tighter header so
+    the body-block owns more vertical space; consider an "auto-advance off" affordance for users who
+    need more time (cognitive/motor accessibility, design system §8.7).
+11. Verify "Today's Pick" `white70` text meets AA on `scheme.primary`; if borderline, switch to a
+    surface-tinted card with `onSurface` text or raise opacity.
+12. Add a one-line "designed to be gentle / no equipment needed" trust strip on Home or the body-part
+    screen (research §3 trust signals).
+13. Bump `centerLabel` and `durationLabel` legibility a notch for seniors; ensure the ring grows to
+    260dp in large-text mode (design system §8.4).
+
+#### P2 — later
+14. Add a real `formCue` (and optional `cuesByLevel`) field to the stretch schema + model so the
+    overlay isn't reusing `breathingCue`/`commonMistakes` — authored, level-aware cues.
+15. Optional second demo angle (front + side) toggle on Detail to mirror StretchIt's multi-angle
+    trust signal cheaply (research §6.3).
+16. "Wrong vs right" still callout beside the demo for the 5–6 stretches where position is most
+    ambiguous.
+17. Once all 45 clips exist, ensure ONE consistent demonstrator/background (ties to the unresolved
+    "one visual language" blocker above).
+
+### Bottom line
+The `DemoPlayer` is the right strategic bet, but on the Detail screen the demo isn't yet the hero and
+the form/breathing guidance is scrolled out of view during the hold. The P0 work is mostly
+**re-ordering and re-weighting existing widgets** — fuse demo + timer + breathing into one hero block,
+caption the demo with a form cue, promote the breathing line, enlarge the demo in the player, and warm
+up Home — all with existing tokens and zero new dependencies. That turns "watch-don't-read" and
+"am I doing it right?" from aspirations into the screen's center of gravity.

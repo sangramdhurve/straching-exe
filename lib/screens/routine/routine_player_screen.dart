@@ -6,6 +6,7 @@ import '../../core/constants/app_constants.dart';
 import '../../data/content_repository.dart';
 import '../../models/routine.dart';
 import '../../models/stretch.dart';
+import '../../widgets/demo_player.dart';
 import '../../widgets/hold_timer_ring.dart';
 import '../../widgets/visual_placeholder.dart';
 
@@ -35,6 +36,8 @@ class _RoutinePlayerScreenState extends State<RoutinePlayerScreen> {
   int _i = 0;
   bool _resting = false;
   bool _done = false;
+  // The active-segment demo follows its hold timer's running state.
+  bool _demoPlaying = true;
 
   @override
   void initState() {
@@ -170,12 +173,14 @@ class _RoutinePlayerScreenState extends State<RoutinePlayerScreen> {
                                       .titleMedium
                                       ?.copyWith(color: scheme.primary)),
                               const SizedBox(height: AppSpacing.lg),
+                              // Demo is the dominant element — the body to copy.
                               ConstrainedBox(
                                 constraints: const BoxConstraints(
-                                    maxWidth: 200, maxHeight: 200),
+                                    maxWidth: 280, maxHeight: 280),
                                 child: AspectRatio(
                                   aspectRatio: 1,
-                                  child: VisualPlaceholder(stretch: s),
+                                  child: DemoPlayer(
+                                      stretch: s, playing: _demoPlaying),
                                 ),
                               ),
                               const SizedBox(height: AppSpacing.lg),
@@ -185,15 +190,35 @@ class _RoutinePlayerScreenState extends State<RoutinePlayerScreen> {
                                 centerLabel: seg.label,
                                 onComplete: _onSegmentDone,
                                 onSkip: _onSegmentDone,
+                                onRunningChanged: (running) =>
+                                    setState(() => _demoPlaying = running),
                               ),
                               const SizedBox(height: AppSpacing.md),
-                              Text(s.breathingCue,
-                                  textAlign: TextAlign.center,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyMedium
-                                      ?.copyWith(
-                                          color: scheme.onSurfaceVariant)),
+                              if (s.breathingCue.isNotEmpty)
+                                Semantics(
+                                  liveRegion: true,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Icon(Icons.air,
+                                          size: 20, color: scheme.primary),
+                                      const SizedBox(width: AppSpacing.sm),
+                                      Flexible(
+                                        child: Text(s.breathingCue,
+                                            textAlign: TextAlign.center,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleMedium
+                                                ?.copyWith(
+                                                    color: scheme.primary,
+                                                    fontWeight:
+                                                        FontWeight.w600)),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                             ] else ...[
                               Text('Rest',
                                   style: Theme.of(context)
