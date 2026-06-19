@@ -1,0 +1,1803 @@
+{
+  "stretches": [
+    {
+      "id": "neck_side_stretch",
+      "name": "Neck Side Stretch",
+      "bodyPartId": "neck",
+      "bodyPart": "Neck",
+      "props": [
+        "none"
+      ],
+      "level": "standard",
+      "targetMuscles": [
+        "Upper trapezius",
+        "Levator scapulae"
+      ],
+      "holdSeconds": 30,
+      "sides": 2,
+      "durationLabel": "30 sec each side",
+      "steps": [
+        "Sit or stand tall with your shoulders relaxed.",
+        "Gently lower your right ear toward your right shoulder.",
+        "Hold, breathing slowly, feeling a stretch along the left side of your neck.",
+        "Return to center and switch sides."
+      ],
+      "breathingCue": "Exhale slowly as you ease into the stretch.",
+      "commonMistakes": [
+        "Don't lift your shoulder toward your ear.",
+        "Avoid forcing or bouncing the movement."
+      ],
+      "safetyNote": "Move slowly and never stretch into sharp pain.",
+      "variants": {
+        "gentle": "Keep the range small and rest a hand in your lap.",
+        "deeper": "Let your hand gently rest on the side of your head for a touch more stretch."
+      },
+      "assetType": "illustration",
+      "assetFile": "assets/visuals/neck_side_stretch.png",
+      "tags": [
+        "desk",
+        "quick",
+        "beginner"
+      ]
+    },
+    {
+      "id": "neck_rotation",
+      "name": "Neck Rotation",
+      "bodyPartId": "neck",
+      "bodyPart": "Neck",
+      "props": [
+        "none"
+      ],
+      "level": "gentle",
+      "targetMuscles": [
+        "Sternocleidomastoid",
+        "Cervical rotators"
+      ],
+      "holdSeconds": 20,
+      "sides": 2,
+      "durationLabel": "20 sec each side",
+      "steps": [
+        "Sit tall with a long spine.",
+        "Slowly turn your head to look over your right shoulder.",
+        "Hold gently, keeping your shoulders still.",
+        "Return to center and turn to the left."
+      ],
+      "breathingCue": "Breathe evenly throughout.",
+      "commonMistakes": [
+        "Don't rush the rotation.",
+        "Keep your chin level, not tilted up."
+      ],
+      "safetyNote": "If you feel dizzy, stop and return to center.",
+      "variants": {
+        "gentle": "Turn only as far as is comfortable.",
+        "deeper": "Pause and take one extra slow breath at the end of the turn."
+      },
+      "assetType": "illustration",
+      "assetFile": "assets/visuals/neck_rotation.png",
+      "tags": [
+        "desk",
+        "seniors",
+        "beginner"
+      ]
+    },
+    {
+      "id": "neck_forward_flexion",
+      "name": "Back-of-Neck Stretch",
+      "bodyPartId": "neck",
+      "bodyPart": "Neck",
+      "props": [
+        "none"
+      ],
+      "level": "standard",
+      "targetMuscles": [
+        "Upper trapezius",
+        "Cervical extensors"
+      ],
+      "holdSeconds": 30,
+      "sides": 1,
+      "durationLabel": "30 sec",
+      "steps": [
+        "Sit or stand tall with relaxed shoulders.",
+        "Gently drop your chin toward your chest.",
+        "Let the weight of your head create a stretch up the back of your neck.",
+        "Slowly lift your head back to neutral."
+      ],
+      "breathingCue": "Exhale as your chin lowers.",
+      "commonMistakes": [
+        "Don't round your upper back to reach further.",
+        "Avoid pulling your head down hard."
+      ],
+      "safetyNote": "Keep the movement gentle; the neck is sensitive.",
+      "variants": {
+        "gentle": "Lower the chin only halfway.",
+        "deeper": "Rest your fingertips lightly on the back of your head."
+      },
+      "assetType": "illustration",
+      "assetFile": "assets/visuals/neck_forward_flexion.png",
+      "tags": [
+        "desk",
+        "posture",
+        "quick"
+      ]
+    },
+    {
+      "id": "cross_body_shoulder",
+      "name": "Cross-Body Shoulder Stretch",
+      "bodyPartId": "shoulders_upper_back",
+      "bodyPart": "Shoulders & Upper Back",
+      "props": [
+        "none"
+      ],
+      "level": "standard",
+      "targetMuscles": [
+        "Posterior deltoid",
+        "Rhomboids"
+      ],
+      "holdSeconds": 30,
+      "sides": 2,
+      "durationLabel": "30 sec each side",
+      "steps": [
+        "Bring your right arm straight across your chest.",
+        "Use your left hand to gently draw the arm closer.",
+        "Keep your shoulder down and relaxed.",
+        "Hold, then switch arms."
+      ],
+      "breathingCue": "Exhale as you draw the arm in.",
+      "commonMistakes": [
+        "Don't pull on the elbow joint itself.",
+        "Avoid shrugging the shoulder up."
+      ],
+      "safetyNote": "Ease off if you feel pinching in the shoulder.",
+      "variants": {
+        "gentle": "Support the arm with less pressure.",
+        "deeper": "Draw the arm slightly closer to your chest."
+      },
+      "assetType": "video",
+      "assetFile": "assets/visuals/cross_body_shoulder.mp4",
+      "tags": [
+        "desk",
+        "upper_body",
+        "warmup"
+      ]
+    },
+    {
+      "id": "upper_back_clasp",
+      "name": "Upper Back Rounding",
+      "bodyPartId": "shoulders_upper_back",
+      "bodyPart": "Shoulders & Upper Back",
+      "props": [
+        "none"
+      ],
+      "level": "standard",
+      "targetMuscles": [
+        "Rhomboids",
+        "Trapezius"
+      ],
+      "holdSeconds": 30,
+      "sides": 1,
+      "durationLabel": "30 sec",
+      "steps": [
+        "Clasp your hands together and extend your arms in front of you.",
+        "Round your upper back and push your hands away.",
+        "Let your head relax and feel the stretch between your shoulder blades.",
+        "Slowly return to upright."
+      ],
+      "breathingCue": "Exhale as you round and reach forward.",
+      "commonMistakes": [
+        "Don't hold your breath.",
+        "Keep the movement in your upper back, not your lower back."
+      ],
+      "safetyNote": "Move smoothly in and out of the position.",
+      "variants": {
+        "gentle": "Reach forward only slightly.",
+        "deeper": "Tuck your chin and round a little more deeply."
+      },
+      "assetType": "illustration",
+      "assetFile": "assets/visuals/upper_back_clasp.png",
+      "tags": [
+        "desk",
+        "posture",
+        "upper_body"
+      ]
+    },
+    {
+      "id": "wall_shoulder_slide",
+      "name": "Wall Shoulder Slide",
+      "bodyPartId": "shoulders_upper_back",
+      "bodyPart": "Shoulders & Upper Back",
+      "props": [
+        "wall"
+      ],
+      "level": "gentle",
+      "targetMuscles": [
+        "Deltoids",
+        "Serratus anterior"
+      ],
+      "holdSeconds": 25,
+      "sides": 1,
+      "durationLabel": "25 sec",
+      "steps": [
+        "Stand facing a wall with forearms resting on it.",
+        "Keep your forearms in contact as you slide them slowly upward.",
+        "Stop where you feel a comfortable stretch through your shoulders.",
+        "Slide back down with control."
+      ],
+      "breathingCue": "Breathe steadily as you slide upward.",
+      "commonMistakes": [
+        "Don't arch your lower back.",
+        "Keep your shoulders away from your ears."
+      ],
+      "safetyNote": "Stay within a pain-free range overhead.",
+      "variants": {
+        "gentle": "Slide up only to shoulder height.",
+        "deeper": "Reach a little higher while keeping ribs down."
+      },
+      "assetType": "illustration",
+      "assetFile": "assets/visuals/wall_shoulder_slide.png",
+      "tags": [
+        "wall",
+        "seniors",
+        "posture"
+      ]
+    },
+    {
+      "id": "wrist_flexor",
+      "name": "Wrist Flexor Stretch",
+      "bodyPartId": "arms_wrists",
+      "bodyPart": "Arms & Wrists",
+      "props": [
+        "none"
+      ],
+      "level": "standard",
+      "targetMuscles": [
+        "Wrist flexors",
+        "Forearm"
+      ],
+      "holdSeconds": 25,
+      "sides": 2,
+      "durationLabel": "25 sec each side",
+      "steps": [
+        "Extend your right arm forward, palm up.",
+        "With your other hand, gently pull the fingers down and back.",
+        "Feel the stretch along the inside of your forearm.",
+        "Hold, then switch sides."
+      ],
+      "breathingCue": "Exhale as you ease into the stretch.",
+      "commonMistakes": [
+        "Don't lock the elbow harshly.",
+        "Keep the pull gentle."
+      ],
+      "safetyNote": "Great for relief after typing; stop if you feel tingling.",
+      "variants": {
+        "gentle": "Bend the elbow slightly to reduce intensity.",
+        "deeper": "Straighten the arm fully for more stretch."
+      },
+      "assetType": "illustration",
+      "assetFile": "assets/visuals/wrist_flexor.png",
+      "tags": [
+        "desk",
+        "quick",
+        "upper_body"
+      ]
+    },
+    {
+      "id": "wrist_extensor",
+      "name": "Wrist Extensor Stretch",
+      "bodyPartId": "arms_wrists",
+      "bodyPart": "Arms & Wrists",
+      "props": [
+        "none"
+      ],
+      "level": "standard",
+      "targetMuscles": [
+        "Wrist extensors",
+        "Forearm"
+      ],
+      "holdSeconds": 25,
+      "sides": 2,
+      "durationLabel": "25 sec each side",
+      "steps": [
+        "Extend your right arm forward, palm down.",
+        "Let your hand drop and gently pull it toward you.",
+        "Feel the stretch along the top of your forearm.",
+        "Hold, then switch sides."
+      ],
+      "breathingCue": "Breathe slowly and relax the hand.",
+      "commonMistakes": [
+        "Don't force the wrist.",
+        "Keep your shoulder relaxed."
+      ],
+      "safetyNote": "Ease off if your wrist feels strained.",
+      "variants": {
+        "gentle": "Apply only light pressure.",
+        "deeper": "Straighten the elbow fully and curl the fingers under."
+      },
+      "assetType": "illustration",
+      "assetFile": "assets/visuals/wrist_extensor.png",
+      "tags": [
+        "desk",
+        "quick",
+        "upper_body"
+      ]
+    },
+    {
+      "id": "triceps_overhead",
+      "name": "Overhead Triceps Stretch",
+      "bodyPartId": "arms_wrists",
+      "bodyPart": "Arms & Wrists",
+      "props": [
+        "none"
+      ],
+      "level": "standard",
+      "targetMuscles": [
+        "Triceps",
+        "Lats"
+      ],
+      "holdSeconds": 30,
+      "sides": 2,
+      "durationLabel": "30 sec each side",
+      "steps": [
+        "Raise your right arm overhead and bend the elbow so your hand drops behind your head.",
+        "Use your left hand to gently guide the elbow back.",
+        "Feel the stretch along the back of your upper arm.",
+        "Hold, then switch sides."
+      ],
+      "breathingCue": "Exhale as you guide the elbow back.",
+      "commonMistakes": [
+        "Don't push the neck forward.",
+        "Keep your ribs from flaring out."
+      ],
+      "safetyNote": "Avoid if overhead positions bother your shoulder.",
+      "variants": {
+        "gentle": "Just lower the hand behind the head without assisting.",
+        "deeper": "Guide the elbow a little further back."
+      },
+      "assetType": "illustration",
+      "assetFile": "assets/visuals/triceps_overhead.png",
+      "tags": [
+        "warmup",
+        "upper_body",
+        "cooldown"
+      ]
+    },
+    {
+      "id": "doorway_chest",
+      "name": "Doorway Chest Opener",
+      "bodyPartId": "chest",
+      "bodyPart": "Chest",
+      "props": [
+        "wall"
+      ],
+      "level": "standard",
+      "targetMuscles": [
+        "Pectorals",
+        "Anterior deltoid"
+      ],
+      "holdSeconds": 30,
+      "sides": 1,
+      "durationLabel": "30 sec",
+      "steps": [
+        "Stand in a doorway and place your forearms on the frame, elbows about shoulder height.",
+        "Step one foot through and lean gently forward.",
+        "Feel the stretch open across your chest.",
+        "Hold, then step back to release."
+      ],
+      "breathingCue": "Take slow, full breaths to open the chest.",
+      "commonMistakes": [
+        "Don't overarch your lower back.",
+        "Keep your chin level."
+      ],
+      "safetyNote": "Lean only until you feel a comfortable stretch.",
+      "variants": {
+        "gentle": "Lean in just slightly.",
+        "deeper": "Step a little further through the doorway."
+      },
+      "assetType": "illustration",
+      "assetFile": "assets/visuals/doorway_chest.png",
+      "tags": [
+        "posture",
+        "desk",
+        "upper_body"
+      ]
+    },
+    {
+      "id": "clasped_hands_chest",
+      "name": "Behind-Back Chest Stretch",
+      "bodyPartId": "chest",
+      "bodyPart": "Chest",
+      "props": [
+        "none"
+      ],
+      "level": "gentle",
+      "targetMuscles": [
+        "Pectorals",
+        "Biceps",
+        "Anterior deltoid"
+      ],
+      "holdSeconds": 25,
+      "sides": 1,
+      "durationLabel": "25 sec",
+      "steps": [
+        "Clasp your hands behind your lower back.",
+        "Gently straighten your arms and lift your hands slightly.",
+        "Draw your shoulder blades together and open your chest.",
+        "Release slowly."
+      ],
+      "breathingCue": "Inhale to lift the chest, exhale to relax.",
+      "commonMistakes": [
+        "Don't shrug the shoulders up.",
+        "Avoid forcing the arms high."
+      ],
+      "safetyNote": "Keep the lift gentle if your shoulders are tight.",
+      "variants": {
+        "gentle": "Hold a towel between your hands if clasping is hard.",
+        "deeper": "Lift the hands a little higher while keeping ribs down."
+      },
+      "assetType": "illustration",
+      "assetFile": "assets/visuals/clasped_hands_chest.png",
+      "tags": [
+        "posture",
+        "upper_body",
+        "quick"
+      ]
+    },
+    {
+      "id": "seated_spinal_twist",
+      "name": "Seated Spinal Twist",
+      "bodyPartId": "back",
+      "bodyPart": "Mid & Lower Back",
+      "props": [
+        "chair"
+      ],
+      "level": "standard",
+      "targetMuscles": [
+        "Obliques",
+        "Spinal rotators"
+      ],
+      "holdSeconds": 30,
+      "sides": 2,
+      "durationLabel": "30 sec each side",
+      "steps": [
+        "Sit tall on a chair with feet flat on the floor.",
+        "Place your right hand on the chair back and left hand on your right knee.",
+        "Gently twist your torso to the right, lengthening your spine.",
+        "Hold, return to center, and twist to the left."
+      ],
+      "breathingCue": "Inhale to lengthen, exhale to twist a little more.",
+      "commonMistakes": [
+        "Don't yank yourself around with your arms.",
+        "Keep both hips on the seat."
+      ],
+      "safetyNote": "Twist gently and stop at a comfortable point.",
+      "variants": {
+        "gentle": "Twist only a small amount.",
+        "deeper": "Use a slightly firmer hold to deepen the rotation."
+      },
+      "assetType": "illustration",
+      "assetFile": "assets/visuals/seated_spinal_twist.png",
+      "tags": [
+        "desk",
+        "seniors",
+        "posture"
+      ]
+    },
+    {
+      "id": "cat_cow",
+      "name": "Cat-Cow",
+      "bodyPartId": "back",
+      "bodyPart": "Mid & Lower Back",
+      "props": [
+        "none"
+      ],
+      "level": "gentle",
+      "targetMuscles": [
+        "Spinal erectors",
+        "Abdominals"
+      ],
+      "holdSeconds": 40,
+      "sides": 1,
+      "durationLabel": "40 sec",
+      "steps": [
+        "Come onto your hands and knees on a soft surface.",
+        "Inhale, drop your belly and lift your gaze (cow).",
+        "Exhale, round your back and tuck your chin (cat).",
+        "Flow slowly between the two for several breaths."
+      ],
+      "breathingCue": "Inhale to arch, exhale to round.",
+      "commonMistakes": [
+        "Don't rush the flow.",
+        "Keep your wrists under your shoulders."
+      ],
+      "safetyNote": "Use a cushion under your knees if needed.",
+      "variants": {
+        "gentle": "Make the movements small and slow.",
+        "deeper": "Add a slightly larger arch and round each cycle."
+      },
+      "assetType": "illustration",
+      "assetFile": "assets/visuals/cat_cow.png",
+      "tags": [
+        "morning",
+        "warmup",
+        "lower_body"
+      ]
+    },
+    {
+      "id": "knees_to_chest",
+      "name": "Knees-to-Chest",
+      "bodyPartId": "back",
+      "bodyPart": "Mid & Lower Back",
+      "props": [
+        "none"
+      ],
+      "level": "gentle",
+      "targetMuscles": [
+        "Lower back",
+        "Glutes"
+      ],
+      "holdSeconds": 30,
+      "sides": 1,
+      "durationLabel": "30 sec",
+      "steps": [
+        "Lie on your back on a comfortable surface.",
+        "Draw both knees gently toward your chest.",
+        "Wrap your arms around your shins and relax your shoulders.",
+        "Hold, then lower your feet slowly."
+      ],
+      "breathingCue": "Exhale as you hug the knees in.",
+      "commonMistakes": [
+        "Don't lift your head and neck off the floor.",
+        "Keep the hold relaxed."
+      ],
+      "safetyNote": "Gentle and soothing for the lower back.",
+      "variants": {
+        "gentle": "Hug one knee at a time.",
+        "deeper": "Gently rock side to side to massage the lower back."
+      },
+      "assetType": "illustration",
+      "assetFile": "assets/visuals/knees_to_chest.png",
+      "tags": [
+        "bedtime",
+        "lower_body",
+        "seniors"
+      ]
+    },
+    {
+      "id": "figure_four_chair",
+      "name": "Seated Figure-4",
+      "bodyPartId": "hips_glutes",
+      "bodyPart": "Hips & Glutes",
+      "props": [
+        "chair"
+      ],
+      "level": "standard",
+      "targetMuscles": [
+        "Glutes",
+        "Piriformis"
+      ],
+      "holdSeconds": 30,
+      "sides": 2,
+      "durationLabel": "30 sec each side",
+      "steps": [
+        "Sit tall on a chair with feet flat.",
+        "Cross your right ankle over your left knee.",
+        "Keep your back straight and gently lean forward from the hips.",
+        "Hold, then switch sides."
+      ],
+      "breathingCue": "Exhale as you hinge forward.",
+      "commonMistakes": [
+        "Don't round your back to lean.",
+        "Keep the resting ankle flexed to protect the knee."
+      ],
+      "safetyNote": "Lean only until you feel a comfortable glute stretch.",
+      "variants": {
+        "gentle": "Stay upright without leaning forward.",
+        "deeper": "Hinge a little further from the hips."
+      },
+      "assetType": "illustration",
+      "assetFile": "assets/visuals/figure_four_chair.png",
+      "tags": [
+        "desk",
+        "seniors",
+        "lower_body"
+      ]
+    },
+    {
+      "id": "standing_hip_flexor",
+      "name": "Standing Hip Flexor Stretch",
+      "bodyPartId": "hips_glutes",
+      "bodyPart": "Hips & Glutes",
+      "props": [
+        "none"
+      ],
+      "level": "standard",
+      "targetMuscles": [
+        "Hip flexors",
+        "Quads"
+      ],
+      "holdSeconds": 30,
+      "sides": 2,
+      "durationLabel": "30 sec each side",
+      "steps": [
+        "Step your right foot back into a small lunge.",
+        "Tuck your tailbone slightly and press your hips forward.",
+        "Feel the stretch at the front of your right hip.",
+        "Hold, then switch sides."
+      ],
+      "breathingCue": "Exhale as you press the hips forward.",
+      "commonMistakes": [
+        "Don't overarch your lower back.",
+        "Keep your front knee over your ankle."
+      ],
+      "safetyNote": "Hold a wall or chair for balance if needed.",
+      "variants": {
+        "gentle": "Take a smaller step and press gently.",
+        "deeper": "Lengthen the stance and raise the same-side arm overhead."
+      },
+      "assetType": "illustration",
+      "assetFile": "assets/visuals/standing_hip_flexor.png",
+      "tags": [
+        "warmup",
+        "lower_body",
+        "morning"
+      ]
+    },
+    {
+      "id": "chair_hamstring",
+      "name": "Chair Hamstring Stretch",
+      "bodyPartId": "hamstrings",
+      "bodyPart": "Hamstrings",
+      "props": [
+        "chair"
+      ],
+      "level": "gentle",
+      "targetMuscles": [
+        "Hamstrings"
+      ],
+      "holdSeconds": 30,
+      "sides": 2,
+      "durationLabel": "30 sec each side",
+      "steps": [
+        "Sit at the edge of a chair and extend your right leg forward, heel on the floor.",
+        "Keep your back straight and hinge forward slightly from the hips.",
+        "Feel the stretch along the back of your thigh.",
+        "Hold, then switch legs."
+      ],
+      "breathingCue": "Exhale as you hinge forward.",
+      "commonMistakes": [
+        "Don't round your back to reach.",
+        "Keep the extended knee soft, not locked."
+      ],
+      "safetyNote": "A safe, supported option for tight hamstrings.",
+      "variants": {
+        "gentle": "Hinge just a little.",
+        "deeper": "Flex your foot and hinge slightly more."
+      },
+      "assetType": "illustration",
+      "assetFile": "assets/visuals/chair_hamstring.png",
+      "tags": [
+        "seniors",
+        "desk",
+        "lower_body"
+      ]
+    },
+    {
+      "id": "towel_hamstring",
+      "name": "Towel Hamstring Stretch",
+      "bodyPartId": "hamstrings",
+      "bodyPart": "Hamstrings",
+      "props": [
+        "towel"
+      ],
+      "level": "standard",
+      "targetMuscles": [
+        "Hamstrings",
+        "Calves"
+      ],
+      "holdSeconds": 30,
+      "sides": 2,
+      "durationLabel": "30 sec each side",
+      "steps": [
+        "Lie on your back and loop a towel around the sole of your right foot.",
+        "Straighten the leg upward, holding the towel ends.",
+        "Gently draw the leg toward you until you feel a stretch.",
+        "Hold, then switch legs."
+      ],
+      "breathingCue": "Breathe slowly and relax into the stretch.",
+      "commonMistakes": [
+        "Don't pull so hard your hips lift.",
+        "Keep your shoulders relaxed on the floor."
+      ],
+      "safetyNote": "The towel lets you control the intensity precisely.",
+      "variants": {
+        "gentle": "Keep a slight bend in the knee.",
+        "deeper": "Straighten the knee and draw the leg a bit closer."
+      },
+      "assetType": "illustration",
+      "assetFile": "assets/visuals/towel_hamstring.png",
+      "tags": [
+        "cooldown",
+        "lower_body",
+        "bedtime"
+      ]
+    },
+    {
+      "id": "standing_quad",
+      "name": "Standing Quad Stretch",
+      "bodyPartId": "quads_hipflexors",
+      "bodyPart": "Quads & Hip Flexors",
+      "props": [
+        "wall"
+      ],
+      "level": "standard",
+      "targetMuscles": [
+        "Quadriceps",
+        "Hip flexors"
+      ],
+      "holdSeconds": 30,
+      "sides": 2,
+      "durationLabel": "30 sec each side",
+      "steps": [
+        "Stand near a wall and rest one hand on it for balance.",
+        "Bend your right knee and hold your right foot behind you.",
+        "Gently draw the heel toward your glutes, knees together.",
+        "Hold, then switch sides."
+      ],
+      "breathingCue": "Breathe steadily and keep your hips level.",
+      "commonMistakes": [
+        "Don't let the knee splay outward.",
+        "Avoid arching the lower back."
+      ],
+      "safetyNote": "Always use the wall for balance to prevent falls.",
+      "variants": {
+        "gentle": "Hold a loop of towel around the ankle if reaching is hard.",
+        "deeper": "Tuck the tailbone to add a hip-flexor stretch."
+      },
+      "assetType": "illustration",
+      "assetFile": "assets/visuals/standing_quad.png",
+      "tags": [
+        "warmup",
+        "lower_body",
+        "wall"
+      ]
+    },
+    {
+      "id": "kneeling_hip_flexor",
+      "name": "Kneeling Hip Flexor Stretch",
+      "bodyPartId": "quads_hipflexors",
+      "bodyPart": "Quads & Hip Flexors",
+      "props": [
+        "none"
+      ],
+      "level": "standard",
+      "targetMuscles": [
+        "Hip flexors",
+        "Quads"
+      ],
+      "holdSeconds": 30,
+      "sides": 2,
+      "durationLabel": "30 sec each side",
+      "steps": [
+        "Kneel on your right knee with your left foot flat in front (half-kneel).",
+        "Use a cushion under the kneeling knee for comfort.",
+        "Gently press your hips forward, tucking the tailbone.",
+        "Hold, then switch sides."
+      ],
+      "breathingCue": "Exhale as you ease the hips forward.",
+      "commonMistakes": [
+        "Don't let the front knee pass your toes.",
+        "Keep your chest tall."
+      ],
+      "safetyNote": "Pad the knee; skip if kneeling is uncomfortable.",
+      "variants": {
+        "gentle": "Press forward only slightly.",
+        "deeper": "Raise the same-side arm overhead and lean gently."
+      },
+      "assetType": "illustration",
+      "assetFile": "assets/visuals/kneeling_hip_flexor.png",
+      "tags": [
+        "cooldown",
+        "lower_body"
+      ]
+    },
+    {
+      "id": "wall_calf",
+      "name": "Standing Calf Stretch",
+      "bodyPartId": "calves_ankles",
+      "bodyPart": "Calves & Ankles",
+      "props": [
+        "wall"
+      ],
+      "level": "standard",
+      "targetMuscles": [
+        "Gastrocnemius",
+        "Soleus"
+      ],
+      "holdSeconds": 30,
+      "sides": 2,
+      "durationLabel": "30 sec each side",
+      "steps": [
+        "Face a wall and place both hands on it at shoulder height.",
+        "Step your right foot back, heel pressing down, leg straight.",
+        "Lean toward the wall until you feel a calf stretch.",
+        "Hold, then switch legs."
+      ],
+      "breathingCue": "Breathe slowly as you lean in.",
+      "commonMistakes": [
+        "Don't let the back heel lift.",
+        "Keep the back leg straight for the upper calf."
+      ],
+      "safetyNote": "Great pre- and post-walk; never bounce.",
+      "variants": {
+        "gentle": "Take a smaller step back.",
+        "deeper": "Bend the back knee slightly to reach the lower calf (soleus)."
+      },
+      "assetType": "illustration",
+      "assetFile": "assets/visuals/wall_calf.png",
+      "tags": [
+        "warmup",
+        "cooldown",
+        "wall"
+      ]
+    },
+    {
+      "id": "ankle_circles",
+      "name": "Ankle Circles",
+      "bodyPartId": "calves_ankles",
+      "bodyPart": "Calves & Ankles",
+      "props": [
+        "chair"
+      ],
+      "level": "gentle",
+      "targetMuscles": [
+        "Ankle stabilizers",
+        "Lower leg"
+      ],
+      "holdSeconds": 20,
+      "sides": 2,
+      "durationLabel": "20 sec each side",
+      "steps": [
+        "Sit tall on a chair and lift your right foot off the floor.",
+        "Slowly circle the ankle in one direction.",
+        "Reverse the direction after a few circles.",
+        "Lower the foot and switch sides."
+      ],
+      "breathingCue": "Breathe naturally and keep the motion smooth.",
+      "commonMistakes": [
+        "Don't move the whole leg — isolate the ankle.",
+        "Keep the circles slow and controlled."
+      ],
+      "safetyNote": "Gentle mobility, ideal for stiff or swollen ankles.",
+      "variants": {
+        "gentle": "Make smaller circles.",
+        "deeper": "Make larger circles and add gentle point-and-flex."
+      },
+      "assetType": "illustration",
+      "assetFile": "assets/visuals/ankle_circles.png",
+      "tags": [
+        "seniors",
+        "morning",
+        "lower_body"
+      ]
+    },
+    {
+      "id": "neck_chin_tuck",
+      "name": "Chin Tuck",
+      "bodyPartId": "neck",
+      "bodyPart": "Neck",
+      "props": [
+        "none"
+      ],
+      "level": "gentle",
+      "targetMuscles": [
+        "Deep neck flexors",
+        "Upper trapezius"
+      ],
+      "holdSeconds": 10,
+      "sides": 1,
+      "durationLabel": "10 sec x 5",
+      "steps": [
+        "Sit or stand tall, looking straight ahead.",
+        "Gently draw your chin straight back, making a 'double chin'.",
+        "Hold briefly, feeling a lengthening at the back of your neck.",
+        "Release and repeat slowly."
+      ],
+      "breathingCue": "Exhale as you tuck the chin back.",
+      "commonMistakes": [
+        "Don't tip your head down.",
+        "Keep the movement small and gentle."
+      ],
+      "safetyNote": "A great posture reset; keep it pain-free.",
+      "variants": {
+        "gentle": "Do fewer, smaller repetitions.",
+        "deeper": "Hold each tuck a few seconds longer."
+      },
+      "assetType": "illustration",
+      "assetFile": "assets/visuals/neck_chin_tuck.png",
+      "tags": [
+        "desk",
+        "posture",
+        "quick"
+      ]
+    },
+    {
+      "id": "upper_trap_seated",
+      "name": "Seated Upper Trap Stretch",
+      "bodyPartId": "neck",
+      "bodyPart": "Neck",
+      "props": [
+        "chair"
+      ],
+      "level": "standard",
+      "targetMuscles": [
+        "Upper trapezius"
+      ],
+      "holdSeconds": 30,
+      "sides": 2,
+      "durationLabel": "30 sec each side",
+      "steps": [
+        "Sit on a chair and hold the seat edge with your right hand.",
+        "Tilt your left ear toward your left shoulder.",
+        "Let your right shoulder anchor down for a deeper stretch.",
+        "Hold, then switch sides."
+      ],
+      "breathingCue": "Breathe slowly and let the shoulder relax down.",
+      "commonMistakes": [
+        "Don't pull hard on the head.",
+        "Keep the anchored shoulder down."
+      ],
+      "safetyNote": "Anchoring the hand makes this effective — stay gentle.",
+      "variants": {
+        "gentle": "Skip the hand anchor and just tilt.",
+        "deeper": "Rest the opposite hand lightly on your head."
+      },
+      "assetType": "illustration",
+      "assetFile": "assets/visuals/upper_trap_seated.png",
+      "tags": [
+        "desk",
+        "seniors",
+        "upper_body"
+      ]
+    },
+    {
+      "id": "shoulder_rolls",
+      "name": "Shoulder Rolls",
+      "bodyPartId": "shoulders_upper_back",
+      "bodyPart": "Shoulders & Upper Back",
+      "props": [
+        "none"
+      ],
+      "level": "gentle",
+      "targetMuscles": [
+        "Trapezius",
+        "Deltoids"
+      ],
+      "holdSeconds": 20,
+      "sides": 1,
+      "durationLabel": "20 sec",
+      "steps": [
+        "Sit or stand tall with arms relaxed.",
+        "Roll both shoulders up, back, and down in a smooth circle.",
+        "Repeat several times, then reverse direction.",
+        "Keep the motion slow and easy."
+      ],
+      "breathingCue": "Inhale as shoulders lift, exhale as they lower.",
+      "commonMistakes": [
+        "Don't rush the circles.",
+        "Keep your neck relaxed."
+      ],
+      "safetyNote": "A gentle warm-up; never force the range.",
+      "variants": {
+        "gentle": "Make the circles small.",
+        "deeper": "Make slow, full circles through the whole range."
+      },
+      "assetType": "illustration",
+      "assetFile": "assets/visuals/shoulder_rolls.png",
+      "tags": [
+        "warmup",
+        "desk",
+        "seniors"
+      ]
+    },
+    {
+      "id": "thread_the_needle",
+      "name": "Thread the Needle",
+      "bodyPartId": "shoulders_upper_back",
+      "bodyPart": "Shoulders & Upper Back",
+      "props": [
+        "none"
+      ],
+      "level": "standard",
+      "targetMuscles": [
+        "Rhomboids",
+        "Posterior shoulder",
+        "Upper back"
+      ],
+      "holdSeconds": 30,
+      "sides": 2,
+      "durationLabel": "30 sec each side",
+      "steps": [
+        "Start on your hands and knees on a soft surface.",
+        "Slide your right arm under your body, palm up, lowering your right shoulder.",
+        "Rest the side of your head down and feel the stretch across your upper back.",
+        "Return and switch sides."
+      ],
+      "breathingCue": "Exhale as you thread the arm through.",
+      "commonMistakes": [
+        "Don't collapse your neck — let it rest gently.",
+        "Keep your hips over your knees."
+      ],
+      "safetyNote": "Use a cushion under the knees if needed.",
+      "variants": {
+        "gentle": "Reach only partway under.",
+        "deeper": "Extend the top arm overhead for more rotation."
+      },
+      "assetType": "illustration",
+      "assetFile": "assets/visuals/thread_the_needle.png",
+      "tags": [
+        "upper_body",
+        "cooldown",
+        "posture"
+      ]
+    },
+    {
+      "id": "prayer_wrist",
+      "name": "Prayer Wrist Stretch",
+      "bodyPartId": "arms_wrists",
+      "bodyPart": "Arms & Wrists",
+      "props": [
+        "none"
+      ],
+      "level": "gentle",
+      "targetMuscles": [
+        "Wrist flexors",
+        "Forearm"
+      ],
+      "holdSeconds": 25,
+      "sides": 1,
+      "durationLabel": "25 sec",
+      "steps": [
+        "Press your palms together in front of your chest, fingers pointing up.",
+        "Keeping palms together, slowly lower your hands toward your waist.",
+        "Stop where you feel a gentle stretch in your wrists and forearms.",
+        "Hold, then release."
+      ],
+      "breathingCue": "Breathe slowly and keep your shoulders relaxed.",
+      "commonMistakes": [
+        "Don't let the palms separate.",
+        "Lower only to a comfortable point."
+      ],
+      "safetyNote": "Soothing after typing; keep it gentle.",
+      "variants": {
+        "gentle": "Lower the hands just slightly.",
+        "deeper": "Lower a little further while keeping palms flat together."
+      },
+      "assetType": "illustration",
+      "assetFile": "assets/visuals/prayer_wrist.png",
+      "tags": [
+        "desk",
+        "quick",
+        "upper_body"
+      ]
+    },
+    {
+      "id": "biceps_wall",
+      "name": "Wall Biceps Stretch",
+      "bodyPartId": "arms_wrists",
+      "bodyPart": "Arms & Wrists",
+      "props": [
+        "wall"
+      ],
+      "level": "standard",
+      "targetMuscles": [
+        "Biceps",
+        "Forearm",
+        "Chest"
+      ],
+      "holdSeconds": 30,
+      "sides": 2,
+      "durationLabel": "30 sec each side",
+      "steps": [
+        "Stand beside a wall and place your right palm flat on it behind you, arm straight.",
+        "Slowly turn your body away from the wall.",
+        "Feel the stretch along the front of your arm and shoulder.",
+        "Hold, then switch sides."
+      ],
+      "breathingCue": "Exhale as you rotate away from the wall.",
+      "commonMistakes": [
+        "Don't shrug the shoulder.",
+        "Turn gently — this is a sensitive area."
+      ],
+      "safetyNote": "Ease off immediately if you feel any nerve tingling.",
+      "variants": {
+        "gentle": "Turn only slightly away.",
+        "deeper": "Rotate a bit further while keeping the arm straight."
+      },
+      "assetType": "illustration",
+      "assetFile": "assets/visuals/biceps_wall.png",
+      "tags": [
+        "wall",
+        "upper_body",
+        "posture"
+      ]
+    },
+    {
+      "id": "corner_chest",
+      "name": "Corner Chest Stretch",
+      "bodyPartId": "chest",
+      "bodyPart": "Chest",
+      "props": [
+        "wall"
+      ],
+      "level": "gentle",
+      "targetMuscles": [
+        "Pectorals",
+        "Anterior deltoid"
+      ],
+      "holdSeconds": 30,
+      "sides": 1,
+      "durationLabel": "30 sec",
+      "steps": [
+        "Stand facing a wall corner with forearms on each wall, elbows shoulder height.",
+        "Step one foot forward and lean gently into the corner.",
+        "Feel your chest open across the front.",
+        "Hold, then step back."
+      ],
+      "breathingCue": "Breathe deeply to expand the chest.",
+      "commonMistakes": [
+        "Don't arch the lower back.",
+        "Keep elbows around shoulder height."
+      ],
+      "safetyNote": "An easy, supported chest opener.",
+      "variants": {
+        "gentle": "Lean in just a little.",
+        "deeper": "Step further forward for a bigger stretch."
+      },
+      "assetType": "illustration",
+      "assetFile": "assets/visuals/corner_chest.png",
+      "tags": [
+        "posture",
+        "desk",
+        "wall"
+      ]
+    },
+    {
+      "id": "floor_chest_opener",
+      "name": "Lying Chest Opener",
+      "bodyPartId": "chest",
+      "bodyPart": "Chest",
+      "props": [
+        "none"
+      ],
+      "level": "gentle",
+      "targetMuscles": [
+        "Pectorals",
+        "Front shoulder"
+      ],
+      "holdSeconds": 40,
+      "sides": 1,
+      "durationLabel": "40 sec",
+      "steps": [
+        "Lie on your back and stretch both arms out to the sides like a 'T'.",
+        "Relax your shoulders toward the floor.",
+        "Let gravity gently open your chest.",
+        "Breathe and hold."
+      ],
+      "breathingCue": "Take slow, expansive breaths.",
+      "commonMistakes": [
+        "Don't force the arms down.",
+        "Keep your lower back relaxed."
+      ],
+      "safetyNote": "Very gentle — ideal for tight, rounded shoulders.",
+      "variants": {
+        "gentle": "Place a rolled towel along your spine for support.",
+        "deeper": "Move the arms slightly higher into a 'Y' shape."
+      },
+      "assetType": "illustration",
+      "assetFile": "assets/visuals/floor_chest_opener.png",
+      "tags": [
+        "bedtime",
+        "posture",
+        "upper_body"
+      ]
+    },
+    {
+      "id": "seated_chest_open",
+      "name": "Seated Open-Arms Chest Stretch",
+      "bodyPartId": "chest",
+      "bodyPart": "Chest",
+      "props": [
+        "chair"
+      ],
+      "level": "gentle",
+      "targetMuscles": [
+        "Pectorals",
+        "Biceps"
+      ],
+      "holdSeconds": 25,
+      "sides": 1,
+      "durationLabel": "25 sec",
+      "steps": [
+        "Sit tall on a chair, feet flat.",
+        "Reach both arms back and open them wide, palms forward.",
+        "Squeeze your shoulder blades together and lift your chest.",
+        "Hold, then relax."
+      ],
+      "breathingCue": "Inhale to open, exhale to soften.",
+      "commonMistakes": [
+        "Don't let your chin jut forward.",
+        "Keep shoulders down, away from ears."
+      ],
+      "safetyNote": "Great quick reset between desk tasks.",
+      "variants": {
+        "gentle": "Open the arms only slightly.",
+        "deeper": "Reach the arms a little further back."
+      },
+      "assetType": "illustration",
+      "assetFile": "assets/visuals/seated_chest_open.png",
+      "tags": [
+        "desk",
+        "seniors",
+        "posture"
+      ]
+    },
+    {
+      "id": "childs_pose",
+      "name": "Child's Pose",
+      "bodyPartId": "back",
+      "bodyPart": "Mid & Lower Back",
+      "props": [
+        "none"
+      ],
+      "level": "gentle",
+      "targetMuscles": [
+        "Lower back",
+        "Lats",
+        "Hips"
+      ],
+      "holdSeconds": 45,
+      "sides": 1,
+      "durationLabel": "45 sec",
+      "steps": [
+        "Kneel on a soft surface and sit your hips back toward your heels.",
+        "Walk your hands forward and lower your chest toward the floor.",
+        "Rest your forehead down and relax.",
+        "Breathe slowly and let your back lengthen."
+      ],
+      "breathingCue": "Breathe into your back ribs.",
+      "commonMistakes": [
+        "Don't hold tension in the shoulders.",
+        "Let the hips sink as comfort allows."
+      ],
+      "safetyNote": "Place a cushion under hips or knees if needed.",
+      "variants": {
+        "gentle": "Widen the knees and rest on a pillow.",
+        "deeper": "Walk the hands further forward and to one side."
+      },
+      "assetType": "illustration",
+      "assetFile": "assets/visuals/childs_pose.png",
+      "tags": [
+        "bedtime",
+        "relax",
+        "lower_body"
+      ]
+    },
+    {
+      "id": "standing_back_extension",
+      "name": "Standing Back Extension",
+      "bodyPartId": "back",
+      "bodyPart": "Mid & Lower Back",
+      "props": [
+        "none"
+      ],
+      "level": "gentle",
+      "targetMuscles": [
+        "Spinal erectors",
+        "Abdominals"
+      ],
+      "holdSeconds": 10,
+      "sides": 1,
+      "durationLabel": "10 sec x 4",
+      "steps": [
+        "Stand tall with hands on your lower back.",
+        "Gently lean back, lifting your chest toward the ceiling.",
+        "Go only as far as is comfortable, supporting with your hands.",
+        "Return to upright and repeat."
+      ],
+      "breathingCue": "Inhale as you gently extend back.",
+      "commonMistakes": [
+        "Don't crank the neck back.",
+        "Keep the movement small and controlled."
+      ],
+      "safetyNote": "A counter-stretch for sitting; avoid if it bothers your back.",
+      "variants": {
+        "gentle": "Lean back just slightly.",
+        "deeper": "Extend a touch further with full support."
+      },
+      "assetType": "illustration",
+      "assetFile": "assets/visuals/standing_back_extension.png",
+      "tags": [
+        "desk",
+        "posture",
+        "quick"
+      ]
+    },
+    {
+      "id": "supine_figure_four",
+      "name": "Lying Figure-4",
+      "bodyPartId": "hips_glutes",
+      "bodyPart": "Hips & Glutes",
+      "props": [
+        "none"
+      ],
+      "level": "standard",
+      "targetMuscles": [
+        "Glutes",
+        "Piriformis"
+      ],
+      "holdSeconds": 30,
+      "sides": 2,
+      "durationLabel": "30 sec each side",
+      "steps": [
+        "Lie on your back with both knees bent.",
+        "Cross your right ankle over your left thigh.",
+        "Reach through and gently pull your left thigh toward your chest.",
+        "Hold, then switch sides."
+      ],
+      "breathingCue": "Exhale as you draw the leg in.",
+      "commonMistakes": [
+        "Don't lift your head and shoulders off the floor.",
+        "Keep the crossed foot flexed."
+      ],
+      "safetyNote": "A comfortable, supported glute stretch.",
+      "variants": {
+        "gentle": "Keep the bottom foot on the floor instead of pulling in.",
+        "deeper": "Draw the thigh a little closer to your chest."
+      },
+      "assetType": "illustration",
+      "assetFile": "assets/visuals/supine_figure_four.png",
+      "tags": [
+        "bedtime",
+        "lower_body",
+        "cooldown"
+      ]
+    },
+    {
+      "id": "butterfly_stretch",
+      "name": "Butterfly Stretch",
+      "bodyPartId": "hips_glutes",
+      "bodyPart": "Hips & Glutes",
+      "props": [
+        "none"
+      ],
+      "level": "gentle",
+      "targetMuscles": [
+        "Inner thighs",
+        "Hips"
+      ],
+      "holdSeconds": 40,
+      "sides": 1,
+      "durationLabel": "40 sec",
+      "steps": [
+        "Sit on the floor and bring the soles of your feet together.",
+        "Hold your ankles and let your knees relax outward.",
+        "Sit tall and hinge forward slightly from the hips.",
+        "Hold and breathe."
+      ],
+      "breathingCue": "Exhale as you gently fold forward.",
+      "commonMistakes": [
+        "Don't bounce the knees.",
+        "Keep your back long, not rounded."
+      ],
+      "safetyNote": "Sit on a cushion if your back rounds.",
+      "variants": {
+        "gentle": "Move feet further from your body and stay upright.",
+        "deeper": "Bring feet closer and fold a little more."
+      },
+      "assetType": "illustration",
+      "assetFile": "assets/visuals/butterfly_stretch.png",
+      "tags": [
+        "lower_body",
+        "morning",
+        "seniors"
+      ]
+    },
+    {
+      "id": "standing_glute_chair",
+      "name": "Standing Glute Stretch",
+      "bodyPartId": "hips_glutes",
+      "bodyPart": "Hips & Glutes",
+      "props": [
+        "chair"
+      ],
+      "level": "standard",
+      "targetMuscles": [
+        "Glutes",
+        "Hips"
+      ],
+      "holdSeconds": 30,
+      "sides": 2,
+      "durationLabel": "30 sec each side",
+      "steps": [
+        "Stand behind a chair and hold the back for balance.",
+        "Cross your right ankle over your left thigh, just above the knee.",
+        "Sit your hips back and down slightly, like a one-legged squat.",
+        "Hold, then switch sides."
+      ],
+      "breathingCue": "Exhale as you sit your hips back.",
+      "commonMistakes": [
+        "Don't round your back.",
+        "Keep the standing knee behind your toes."
+      ],
+      "safetyNote": "Always hold the chair for steady balance.",
+      "variants": {
+        "gentle": "Sit back only a little.",
+        "deeper": "Sit the hips lower for a stronger stretch."
+      },
+      "assetType": "illustration",
+      "assetFile": "assets/visuals/standing_glute_chair.png",
+      "tags": [
+        "lower_body",
+        "warmup",
+        "seniors"
+      ]
+    },
+    {
+      "id": "standing_forward_fold",
+      "name": "Standing Forward Fold",
+      "bodyPartId": "hamstrings",
+      "bodyPart": "Hamstrings",
+      "props": [
+        "none"
+      ],
+      "level": "standard",
+      "targetMuscles": [
+        "Hamstrings",
+        "Lower back"
+      ],
+      "holdSeconds": 30,
+      "sides": 1,
+      "durationLabel": "30 sec",
+      "steps": [
+        "Stand with feet hip-width apart, knees slightly bent.",
+        "Hinge at your hips and fold forward, letting your arms hang.",
+        "Relax your head and neck toward the floor.",
+        "Slowly roll back up to stand."
+      ],
+      "breathingCue": "Exhale as you fold; breathe softly while holding.",
+      "commonMistakes": [
+        "Don't lock your knees.",
+        "Come up slowly to avoid dizziness."
+      ],
+      "safetyNote": "Keep a soft bend in the knees throughout.",
+      "variants": {
+        "gentle": "Bend the knees generously and rest hands on your shins.",
+        "deeper": "Straighten the legs more and let the hands reach the floor."
+      },
+      "assetType": "illustration",
+      "assetFile": "assets/visuals/standing_forward_fold.png",
+      "tags": [
+        "cooldown",
+        "morning",
+        "lower_body"
+      ]
+    },
+    {
+      "id": "single_leg_table",
+      "name": "Table Hamstring Stretch",
+      "bodyPartId": "hamstrings",
+      "bodyPart": "Hamstrings",
+      "props": [
+        "table"
+      ],
+      "level": "standard",
+      "targetMuscles": [
+        "Hamstrings"
+      ],
+      "holdSeconds": 30,
+      "sides": 2,
+      "durationLabel": "30 sec each side",
+      "steps": [
+        "Stand facing a sturdy table at about hip height.",
+        "Rest your right heel on the table with the leg straight.",
+        "Keep your back tall and hinge forward gently from the hips.",
+        "Hold, then switch legs."
+      ],
+      "breathingCue": "Exhale as you hinge toward the leg.",
+      "commonMistakes": [
+        "Don't round your back to reach.",
+        "Use a lower surface if the table is too high."
+      ],
+      "safetyNote": "Use a stable, sturdy surface only.",
+      "variants": {
+        "gentle": "Use a lower surface and stay more upright.",
+        "deeper": "Flex your foot and hinge slightly further."
+      },
+      "assetType": "illustration",
+      "assetFile": "assets/visuals/single_leg_table.png",
+      "tags": [
+        "lower_body",
+        "cooldown",
+        "warmup"
+      ]
+    },
+    {
+      "id": "wall_hamstring",
+      "name": "Lying Wall Hamstring Stretch",
+      "bodyPartId": "hamstrings",
+      "bodyPart": "Hamstrings",
+      "props": [
+        "wall"
+      ],
+      "level": "gentle",
+      "targetMuscles": [
+        "Hamstrings",
+        "Calves"
+      ],
+      "holdSeconds": 40,
+      "sides": 2,
+      "durationLabel": "40 sec each side",
+      "steps": [
+        "Lie on your back near a doorway or wall corner.",
+        "Rest one heel up against the wall with the leg straight.",
+        "Let the other leg extend through the doorway or rest bent.",
+        "Relax and hold, then switch legs."
+      ],
+      "breathingCue": "Breathe slowly and let the leg relax against the wall.",
+      "commonMistakes": [
+        "Don't push into pain.",
+        "Keep your hips on the floor."
+      ],
+      "safetyNote": "Very gentle and relaxing for tight hamstrings.",
+      "variants": {
+        "gentle": "Move further from the wall to ease the stretch.",
+        "deeper": "Scoot closer to the wall for more intensity."
+      },
+      "assetType": "illustration",
+      "assetFile": "assets/visuals/wall_hamstring.png",
+      "tags": [
+        "bedtime",
+        "lower_body",
+        "seniors"
+      ]
+    },
+    {
+      "id": "side_lying_quad",
+      "name": "Side-Lying Quad Stretch",
+      "bodyPartId": "quads_hipflexors",
+      "bodyPart": "Quads & Hip Flexors",
+      "props": [
+        "none"
+      ],
+      "level": "gentle",
+      "targetMuscles": [
+        "Quadriceps",
+        "Hip flexors"
+      ],
+      "holdSeconds": 30,
+      "sides": 2,
+      "durationLabel": "30 sec each side",
+      "steps": [
+        "Lie on your left side with your head resting on your arm.",
+        "Bend your right knee and hold your right foot or ankle behind you.",
+        "Gently draw the heel toward your glutes, knees together.",
+        "Hold, then roll over and switch sides."
+      ],
+      "breathingCue": "Breathe slowly and keep your hips stacked.",
+      "commonMistakes": [
+        "Don't arch your lower back.",
+        "Keep the knees close together."
+      ],
+      "safetyNote": "A stable, fall-free way to stretch the quad.",
+      "variants": {
+        "gentle": "Loop a towel around the ankle if reaching is hard.",
+        "deeper": "Gently press the hips forward as you hold the foot."
+      },
+      "assetType": "illustration",
+      "assetFile": "assets/visuals/side_lying_quad.png",
+      "tags": [
+        "bedtime",
+        "lower_body",
+        "seniors"
+      ]
+    },
+    {
+      "id": "kneeling_quad_wall",
+      "name": "Kneeling Quad Stretch",
+      "bodyPartId": "quads_hipflexors",
+      "bodyPart": "Quads & Hip Flexors",
+      "props": [
+        "wall"
+      ],
+      "level": "deeper",
+      "targetMuscles": [
+        "Quadriceps",
+        "Hip flexors"
+      ],
+      "holdSeconds": 30,
+      "sides": 2,
+      "durationLabel": "30 sec each side",
+      "steps": [
+        "Kneel facing away from a wall, with a cushion under your knee.",
+        "Place the top of your right foot up against the wall behind you.",
+        "Bring your left foot forward into a half-kneel and rise tall.",
+        "Hold, then switch sides."
+      ],
+      "breathingCue": "Exhale and keep your torso upright.",
+      "commonMistakes": [
+        "Don't let the lower back overarch.",
+        "Keep the front knee over the ankle."
+      ],
+      "safetyNote": "An intense stretch — skip if your knees are sensitive.",
+      "variants": {
+        "gentle": "Do the standing or side-lying quad stretch instead.",
+        "deeper": "Bring the front foot forward to lengthen the back-leg stretch."
+      },
+      "assetType": "illustration",
+      "assetFile": "assets/visuals/kneeling_quad_wall.png",
+      "tags": [
+        "cooldown",
+        "lower_body",
+        "wall"
+      ]
+    },
+    {
+      "id": "hip_flexor_chair_elevated",
+      "name": "Elevated Hip Flexor Stretch",
+      "bodyPartId": "quads_hipflexors",
+      "bodyPart": "Quads & Hip Flexors",
+      "props": [
+        "chair"
+      ],
+      "level": "standard",
+      "targetMuscles": [
+        "Hip flexors",
+        "Quads"
+      ],
+      "holdSeconds": 30,
+      "sides": 2,
+      "durationLabel": "30 sec each side",
+      "steps": [
+        "Stand a step in front of a chair, facing away from it.",
+        "Rest the top of your right foot back on the seat.",
+        "Bend your front knee and gently press your hips forward.",
+        "Hold, then switch sides."
+      ],
+      "breathingCue": "Exhale as you press the hips forward.",
+      "commonMistakes": [
+        "Don't overarch the lower back.",
+        "Keep the front knee over the ankle."
+      ],
+      "safetyNote": "Hold a wall for balance; use a low, stable chair.",
+      "variants": {
+        "gentle": "Use the standing hip flexor stretch instead.",
+        "deeper": "Tuck the tailbone and raise the same-side arm overhead."
+      },
+      "assetType": "illustration",
+      "assetFile": "assets/visuals/hip_flexor_chair_elevated.png",
+      "tags": [
+        "lower_body",
+        "cooldown"
+      ]
+    },
+    {
+      "id": "step_calf_stretch",
+      "name": "Step Calf Stretch",
+      "bodyPartId": "calves_ankles",
+      "bodyPart": "Calves & Ankles",
+      "props": [
+        "none"
+      ],
+      "level": "standard",
+      "targetMuscles": [
+        "Gastrocnemius",
+        "Soleus"
+      ],
+      "holdSeconds": 30,
+      "sides": 2,
+      "durationLabel": "30 sec each side",
+      "steps": [
+        "Stand on a step or curb, holding a rail for balance.",
+        "Let your right heel drop below the step edge.",
+        "Feel the stretch lengthen through your calf.",
+        "Hold, then switch sides."
+      ],
+      "breathingCue": "Breathe slowly as the heel lowers.",
+      "commonMistakes": [
+        "Don't drop the heel suddenly.",
+        "Always hold a rail for safety."
+      ],
+      "safetyNote": "Only do this with a secure handrail to prevent falls.",
+      "variants": {
+        "gentle": "Lower the heel only slightly.",
+        "deeper": "Let the heel sink a little further with control."
+      },
+      "assetType": "illustration",
+      "assetFile": "assets/visuals/step_calf_stretch.png",
+      "tags": [
+        "warmup",
+        "cooldown",
+        "lower_body"
+      ]
+    },
+    {
+      "id": "seated_calf_towel",
+      "name": "Seated Calf Stretch with Towel",
+      "bodyPartId": "calves_ankles",
+      "bodyPart": "Calves & Ankles",
+      "props": [
+        "towel"
+      ],
+      "level": "gentle",
+      "targetMuscles": [
+        "Gastrocnemius",
+        "Soleus"
+      ],
+      "holdSeconds": 30,
+      "sides": 2,
+      "durationLabel": "30 sec each side",
+      "steps": [
+        "Sit on the floor with your right leg straight in front.",
+        "Loop a towel around the ball of your right foot.",
+        "Gently pull the towel to draw your toes toward you.",
+        "Hold, then switch legs."
+      ],
+      "breathingCue": "Exhale as you draw the toes back.",
+      "commonMistakes": [
+        "Don't pull so hard the knee bends.",
+        "Keep your back tall."
+      ],
+      "safetyNote": "The towel gives you easy, precise control.",
+      "variants": {
+        "gentle": "Keep a small bend in the knee.",
+        "deeper": "Straighten the knee fully and pull a touch more."
+      },
+      "assetType": "illustration",
+      "assetFile": "assets/visuals/seated_calf_towel.png",
+      "tags": [
+        "seniors",
+        "cooldown",
+        "lower_body"
+      ]
+    },
+    {
+      "id": "ankle_dorsiflexion_wall",
+      "name": "Wall Ankle Stretch",
+      "bodyPartId": "calves_ankles",
+      "bodyPart": "Calves & Ankles",
+      "props": [
+        "wall"
+      ],
+      "level": "standard",
+      "targetMuscles": [
+        "Soleus",
+        "Ankle joint"
+      ],
+      "holdSeconds": 25,
+      "sides": 2,
+      "durationLabel": "25 sec each side",
+      "steps": [
+        "Stand facing a wall with your right foot a few inches away.",
+        "Keep your heel down and gently drive your knee toward the wall.",
+        "Feel the stretch deep in your ankle and lower calf.",
+        "Hold, then switch sides."
+      ],
+      "breathingCue": "Breathe steadily as the knee moves forward.",
+      "commonMistakes": [
+        "Don't let the heel lift.",
+        "Keep the knee tracking over the toes."
+      ],
+      "safetyNote": "Great for ankle mobility before walking or squats.",
+      "variants": {
+        "gentle": "Place the foot closer to the wall.",
+        "deeper": "Move the foot slightly back for a larger range."
+      },
+      "assetType": "illustration",
+      "assetFile": "assets/visuals/ankle_dorsiflexion_wall.png",
+      "tags": [
+        "warmup",
+        "lower_body",
+        "wall"
+      ]
+    }
+  ]
+}

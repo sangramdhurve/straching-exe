@@ -1,0 +1,205 @@
+{
+  "routines": [
+    {
+      "id": "desk_reset",
+      "name": "Desk Reset",
+      "description": "Loosen your neck, shoulders, and back after sitting.",
+      "minutes": 5,
+      "level": "all",
+      "audience": [
+        "Desk workers"
+      ],
+      "tags": [
+        "desk",
+        "quick"
+      ],
+      "stretchIds": [
+        "neck_side_stretch",
+        "neck_rotation",
+        "cross_body_shoulder",
+        "upper_back_clasp",
+        "wrist_flexor",
+        "seated_spinal_twist"
+      ]
+    },
+    {
+      "id": "full_body_daily",
+      "name": "Full Body Daily",
+      "description": "A balanced head-to-toe stretch for everyday mobility.",
+      "minutes": 10,
+      "level": "all",
+      "audience": [
+        "Everyone"
+      ],
+      "tags": [
+        "full_body",
+        "daily"
+      ],
+      "stretchIds": [
+        "neck_side_stretch",
+        "cross_body_shoulder",
+        "doorway_chest",
+        "seated_spinal_twist",
+        "figure_four_chair",
+        "chair_hamstring",
+        "standing_quad",
+        "wall_calf"
+      ]
+    },
+    {
+      "id": "gentle_seniors",
+      "name": "Gentle for Seniors",
+      "description": "Chair- and wall-supported stretches at a relaxed pace.",
+      "minutes": 8,
+      "level": "gentle",
+      "audience": [
+        "Seniors",
+        "Beginners"
+      ],
+      "tags": [
+        "seniors",
+        "gentle"
+      ],
+      "stretchIds": [
+        "neck_rotation",
+        "wall_shoulder_slide",
+        "seated_spinal_twist",
+        "figure_four_chair",
+        "chair_hamstring",
+        "ankle_circles"
+      ]
+    },
+    {
+      "id": "morning_wakeup",
+      "name": "Morning Wake-Up",
+      "description": "Ease your body awake and get moving for the day.",
+      "minutes": 6,
+      "level": "all",
+      "audience": [
+        "Everyone"
+      ],
+      "tags": [
+        "morning",
+        "warmup"
+      ],
+      "stretchIds": [
+        "cat_cow",
+        "knees_to_chest",
+        "cross_body_shoulder",
+        "standing_hip_flexor",
+        "wall_calf",
+        "neck_side_stretch"
+      ]
+    },
+    {
+      "id": "bedtime_winddown",
+      "name": "Bedtime Wind-Down",
+      "description": "Slow, soothing stretches to relax before sleep.",
+      "minutes": 7,
+      "level": "gentle",
+      "audience": [
+        "Everyone"
+      ],
+      "tags": [
+        "bedtime",
+        "relax"
+      ],
+      "stretchIds": [
+        "knees_to_chest",
+        "cat_cow",
+        "figure_four_chair",
+        "chair_hamstring",
+        "neck_rotation"
+      ]
+    },
+    {
+      "id": "lower_body_loosener",
+      "name": "Lower Body Loosener",
+      "description": "Open tight hips, hamstrings, and calves.",
+      "minutes": 8,
+      "level": "all",
+      "audience": [
+        "Active people"
+      ],
+      "tags": [
+        "lower_body",
+        "cooldown"
+      ],
+      "stretchIds": [
+        "standing_hip_flexor",
+        "chair_hamstring",
+        "towel_hamstring",
+        "standing_quad",
+        "kneeling_hip_flexor",
+        "wall_calf",
+        "ankle_circles"
+      ]
+    },
+    {
+      "id": "neck_shoulder_relief",
+      "name": "Neck & Shoulder Relief",
+      "description": "Melt away tension from the neck, traps, and upper back.",
+      "minutes": 7,
+      "level": "all",
+      "audience": [
+        "Desk workers"
+      ],
+      "tags": [
+        "desk",
+        "upper_body"
+      ],
+      "stretchIds": [
+        "neck_side_stretch",
+        "upper_trap_seated",
+        "neck_chin_tuck",
+        "shoulder_rolls",
+        "cross_body_shoulder",
+        "thread_the_needle"
+      ]
+    },
+    {
+      "id": "hip_opener_flow",
+      "name": "Hip Opener Flow",
+      "description": "Loosen tight hips, glutes, and inner thighs.",
+      "minutes": 9,
+      "level": "all",
+      "audience": [
+        "Everyone"
+      ],
+      "tags": [
+        "lower_body",
+        "cooldown"
+      ],
+      "stretchIds": [
+        "supine_figure_four",
+        "butterfly_stretch",
+        "figure_four_chair",
+        "standing_hip_flexor",
+        "hip_flexor_chair_elevated",
+        "childs_pose"
+      ]
+    },
+    {
+      "id": "posture_fix",
+      "name": "Posture Fix",
+      "description": "Open the chest and reset rounded, slumped posture.",
+      "minutes": 7,
+      "level": "all",
+      "audience": [
+        "Desk workers"
+      ],
+      "tags": [
+        "posture",
+        "desk"
+      ],
+      "stretchIds": [
+        "neck_chin_tuck",
+        "doorway_chest",
+        "corner_chest",
+        "standing_back_extension",
+        "upper_back_clasp",
+        "shoulder_rolls"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+name: stretchhome
+description: "StretchHome — free full-body home stretching for all ages. Stretching only, with simple household props."
+publish_to: 'none'
+version: 0.1.0+1
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.6
+  google_fonts: ^6.2.1          # Plus Jakarta Sans + Inter (see app_theme.dart)
+  shared_preferences: ^2.2.3    # favorites, settings, streak (on-device, no backend)
+  # AdMob. Range >=7.0.0 carries the Gradle-9 fix (5.x broke on Gradle 9/AGP 9);
+  # pub auto-picks the newest your Flutter supports (up to 9.x). Test IDs only for now.
+  google_mobile_ads: '>=7.0.0 <10.0.0'
+  url_launcher: ^6.3.0           # open the hosted privacy policy from Settings
+  # Looping human demo clips (assetType "video" -> assets/visuals/<id>.mp4),
+  # played in sync with the hold timer. Reduce-motion falls back to the poster PNG.
+  video_player: ^2.9.2
+  # Added later, when needed:
+  #   lottie  -> when you add vector/Lottie visuals
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  flutter_launcher_icons: ^0.13.1   # run: dart run flutter_launcher_icons
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/data/
+    - assets/visuals/
+    - assets/icons/bodyparts/
+
+# App icon generation. After `flutter pub get`, run:
+#   dart run flutter_launcher_icons
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon/app_icon.png"
+  adaptive_icon_background: "#2A9D8F"
+  adaptive_icon_foreground: "assets/icon/app_icon_foreground.png"
+  remove_alpha_ios: true
