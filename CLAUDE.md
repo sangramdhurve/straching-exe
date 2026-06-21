@@ -126,6 +126,16 @@ google_fonts downloads fonts on first run (needs internet once); bundle them lat
   form-cue pill on the demo, breathing banner under the timer), 56dp pause control, dominant routine-
   player demo, text-scaling body-part grid (no clip at 1.3×), warmer home greeting + trust line.
   Research: `docs/MARKET-RESEARCH.md`. Media recipe: `tools/encode_demo.sh` + `tools/generate_demos.md`.
+- DONE (fresh-look redesign, teal-based, this round): new `lib/core/theme/app_gradients.dart`
+  (teal→aqua hero gradients); reusable `lib/widgets/gradient_hero_card.dart` (big-numeral hero +
+  ↗ CTA), `floating_nav_bar.dart` (floating capsule nav, active = filled primary pill),
+  `streak_calendar.dart` (month grid + Activity/Streak/This-week stats). New **Clips Library** tab
+  (`lib/screens/clips/clips_library_screen.dart`): featured `DemoPlayer` video + thumbnail list of
+  all 45 → detail. `MainShell` now uses the floating nav (5 tabs: Home/Routines/Clips/Favorites/
+  Settings) + `ShellNavigator` InheritedWidget so screens can switch tabs; NavigationRail (wide)
+  also gets Clips. Home: gradient "Today's pick" hero + 3-tile stats strip + "Browse clips" banner
+  (old `_dailyCard` removed). Settings: `StreakCalendar` card at top. `AppState.completedDates`
+  (new pref `completed_dates`) records each active day; `dateKey()` + `activeDaysInLast()` helpers.
 - NEXT: **generate the human demo media** — install `ffmpeg` (`brew install ffmpeg`), then follow
   `tools/generate_demos.md` to make AI human looping clips for the 5 showcase stretches
   (`neck_side_stretch`, `chair_hamstring`, `standing_forward_fold`, `wall_calf`, `triceps_overhead`),

@@ -4,6 +4,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../core/app_state.dart';
 import '../../core/constants/app_constants.dart';
 import '../../widgets/responsive.dart';
+import '../../widgets/streak_calendar.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -19,6 +20,9 @@ class SettingsScreen extends StatelessWidget {
           child: ListView(
           padding: const EdgeInsets.all(AppSpacing.md),
           children: [
+            _label(context, 'Your activity'),
+            const StreakCalendar(),
+            const Divider(height: AppSpacing.xl),
             _label(context, 'Display'),
             SwitchListTile(
               secondary: const Icon(Icons.format_size),

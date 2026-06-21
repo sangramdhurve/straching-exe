@@ -3,13 +3,16 @@ import 'package:flutter/material.dart';
 import '../../core/app_state.dart';
 import '../../core/constants/app_constants.dart';
 import '../../core/theme/app_colors.dart';
+import '../../core/theme/app_gradients.dart';
 import '../../data/content_repository.dart';
 import '../../models/routine.dart';
 import '../../widgets/body_part_card.dart';
+import '../../widgets/gradient_hero_card.dart';
 import '../../widgets/responsive.dart';
 import '../body_part/body_part_screen.dart';
 import '../routine/routine_detail_screen.dart';
 import '../search/search_screen.dart';
+import 'main_shell.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -73,7 +76,9 @@ class HomeScreen extends StatelessWidget {
               const SizedBox(height: AppSpacing.lg),
               _searchBar(context),
               const SizedBox(height: AppSpacing.lg),
-              if (daily != null) _dailyCard(context, daily),
+              if (daily != null) _todaysPickHero(context, daily),
+              const SizedBox(height: AppSpacing.md),
+              _statsStrip(context),
               const SizedBox(height: AppSpacing.lg),
               Text('Stretch by body part',
                   style: Theme.of(context).textTheme.titleLarge),
@@ -107,10 +112,91 @@ class HomeScreen extends StatelessWidget {
                   );
                 },
               ),
+              const SizedBox(height: AppSpacing.lg),
+              _browseClipsBanner(context),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  /// The premium gradient "Today's pick" hero — big minute count + ↗ start.
+  Widget _todaysPickHero(BuildContext context, Routine daily) {
+    return GradientHeroCard(
+      eyebrow: "TODAY'S PICK",
+      bigNumber: '${daily.minutes}',
+      bigNumberLabel: 'min',
+      title: daily.name,
+      subtitle: daily.description,
+      semanticLabel: "Today's pick: ${daily.name}, ${daily.minutes} minutes",
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => RoutineDetailScreen(routine: daily)),
+      ),
+    );
+  }
+
+  /// Compact activity dashboard (Days / Streak / This week) from real history.
+  Widget _statsStrip(BuildContext context) {
+    return ListenableBuilder(
+      listenable: AppState.instance,
+      builder: (context, _) {
+        final st = AppState.instance;
+        return Row(
+          children: [
+            Expanded(
+                child: _statTile(context, '${st.completedDates.length}',
+                    'Days active')),
+            const SizedBox(width: AppSpacing.sm),
+            Expanded(
+                child: _statTile(context, '${st.streak}', 'Day streak')),
+            const SizedBox(width: AppSpacing.sm),
+            Expanded(
+                child: _statTile(
+                    context, '${st.activeDaysInLast(7)}', 'This week')),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _statTile(BuildContext context, String value, String label) {
+    final scheme = Theme.of(context).colorScheme;
+    return Container(
+      padding: const EdgeInsets.symmetric(
+          vertical: AppSpacing.md, horizontal: AppSpacing.sm),
+      decoration: BoxDecoration(
+        color: scheme.surfaceContainerHighest,
+        borderRadius: BorderRadius.circular(AppRadii.button),
+      ),
+      child: Column(
+        children: [
+          Text(value,
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  color: scheme.primary, fontWeight: FontWeight.w700)),
+          const SizedBox(height: 2),
+          Text(label,
+              textAlign: TextAlign.center,
+              style: Theme.of(context)
+                  .textTheme
+                  .bodySmall
+                  ?.copyWith(color: scheme.onSurfaceVariant)),
+        ],
+      ),
+    );
+  }
+
+  /// Gradient banner that jumps to the Clips Library tab.
+  Widget _browseClipsBanner(BuildContext context) {
+    return GradientHeroCard(
+      gradient: AppGradients.cool,
+      leadingIcon: Icons.play_circle_outline,
+      title: 'Clips Library',
+      subtitle: 'Watch real demos — learn every move at your pace.',
+      ctaIcon: Icons.arrow_forward_rounded,
+      semanticLabel: 'Open the Clips Library',
+      onTap: () => ShellNavigator.of(context)?.go(2),
     );
   }
 
@@ -158,54 +244,4 @@ class HomeScreen extends StatelessWidget {
         ),
       );
 
-  Widget _dailyCard(BuildContext context, Routine daily) {
-    final scheme = Theme.of(context).colorScheme;
-    return Card(
-      color: scheme.primary,
-      child: InkWell(
-        onTap: () => Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (_) => RoutineDetailScreen(routine: daily)),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(AppSpacing.lg),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('TODAY\'S PICK',
-                  style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                      color: Colors.white70, letterSpacing: 1.2)),
-              const SizedBox(height: 6),
-              Text(daily.name,
-                  style: Theme.of(context)
-                      .textTheme
-                      .headlineSmall
-                      ?.copyWith(color: Colors.white)),
-              const SizedBox(height: 4),
-              Text(daily.description,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium
-                      ?.copyWith(color: Colors.white70)),
-              const SizedBox(height: AppSpacing.md),
-              Row(
-                children: [
-                  const Icon(Icons.arrow_forward_rounded, color: Colors.white),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: Text(
-                      '${daily.minutes} min • ${daily.stretchIds.length} stretches',
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
 }

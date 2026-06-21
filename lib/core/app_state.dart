@@ -18,12 +18,34 @@ class AppState extends ChangeNotifier {
   bool onboardingDone = false;
   final Set<String> _availableProps = {};
   bool _propsConfigured = false;
+  final Set<String> _completedDates = {};
 
   Set<String> get favorites => _favorites;
   bool get largeText => _largeText;
   bool get reduceMotion => _reduceMotion;
   ThemeMode get themeMode => _themeMode;
   int get streak => _streak;
+
+  /// Zero-padded yyyy-MM-dd key for a date (sortable, calendar-friendly).
+  static String dateKey(DateTime d) =>
+      '${d.year.toString().padLeft(4, '0')}-'
+      '${d.month.toString().padLeft(2, '0')}-'
+      '${d.day.toString().padLeft(2, '0')}';
+
+  /// Days on which the user completed at least one stretch/routine — powers the
+  /// activity calendar and stats.
+  Set<String> get completedDates => _completedDates;
+  bool completedOn(DateTime d) => _completedDates.contains(dateKey(d));
+
+  /// Distinct active days in the last [days] calendar days (today inclusive).
+  int activeDaysInLast(int days) {
+    final now = DateTime.now();
+    var n = 0;
+    for (var i = 0; i < days; i++) {
+      if (completedOn(now.subtract(Duration(days: i)))) n++;
+    }
+    return n;
+  }
 
   /// Optional props the user said they have at home (chair/wall/table/towel/bag).
   /// "none" (floor) is always implicitly available.
@@ -47,6 +69,9 @@ class AppState extends ChangeNotifier {
     _propsConfigured = p.getBool(PrefKeys.propsConfigured) ?? false;
     _themeMode = _parseTheme(p.getString(PrefKeys.themeMode));
     _streak = p.getInt(PrefKeys.streakCount) ?? 0;
+    _completedDates
+      ..clear()
+      ..addAll(p.getStringList(PrefKeys.completedDates) ?? const []);
     notifyListeners();
   }
 
@@ -98,6 +123,11 @@ class AppState extends ChangeNotifier {
   Future<void> registerSessionComplete() async {
     final today = DateTime.now();
     final todayStr = '${today.year}-${today.month}-${today.day}';
+    // Record the day for the activity calendar (idempotent across the day).
+    if (_completedDates.add(dateKey(today))) {
+      await _prefs?.setStringList(
+          PrefKeys.completedDates, _completedDates.toList());
+    }
     final last = _prefs?.getString(PrefKeys.lastStretchDate);
     if (last == todayStr) return; // already counted today
 
